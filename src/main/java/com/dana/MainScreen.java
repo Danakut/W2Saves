@@ -123,7 +123,6 @@ public class MainScreen extends JFrame {
         Path saveFile = null;
         try {
             saveFile = chooseSaveFile();
-            lblStatusResult.setText("ok");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -131,10 +130,15 @@ public class MainScreen extends JFrame {
 
         try {
             handler.openFile(saveFile);
-            lblStatusResult.setText("okx2");
-        } catch (IOException e) {
-            e.printStackTrace();
+            handler.init();
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+
+        String test = handler.testThis();
+        lblStatusResult.setText(test);
     }
 
 
