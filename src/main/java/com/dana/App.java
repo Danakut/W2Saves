@@ -15,7 +15,5 @@ public class App
     public static void run() {
         MainScreen screen = new MainScreen();
         screen.setVisible(true);
-        SaveHandler handler = new SaveHandler();
-        handler.openFile();
     }
 }

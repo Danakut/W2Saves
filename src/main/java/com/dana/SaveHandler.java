@@ -7,12 +7,10 @@ import java.io.*;
 
 public class SaveHandler {
 
-    public void openFile() {
-        Path path = FileSystems.getDefault().getPath("main","java","com", "dana", "App.java");
-
+    public void openFile(Path file) {
 
         Charset charset = Charset.forName("UTF-8");
-        try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
+        try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 System.out.println("ok");

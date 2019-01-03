@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.logging.Handler;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -25,6 +26,7 @@ public class MainScreen extends JFrame {
     }
 
     Container contentPane;
+    SaveHandler handler;
 
 
 
@@ -115,15 +117,17 @@ public class MainScreen extends JFrame {
         contentPane = getContentPane();
         contentPane.setPreferredSize(new Dimension(600, 400));
         this.pack();
+
+        handler = new SaveHandler();
     }
 
     private void btnOpenFileActionClicked() {
         try {
-            Path newPath = openSaveFile();
-            lblStatusResult.setText(newPath.toString());
+            Path saveFile = openSaveFile();
+            handler.openFile(saveFile);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            lblStatusResult.setText(e.getMessage());
         }
     }
 
