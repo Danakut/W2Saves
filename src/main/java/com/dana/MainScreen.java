@@ -5,12 +5,10 @@
 package com.dana;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.logging.Handler;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -122,17 +120,25 @@ public class MainScreen extends JFrame {
     }
 
     private void btnOpenFileActionClicked() {
+        Path saveFile = null;
         try {
-            Path saveFile = openSaveFile();
-            handler.openFile(saveFile);
+            saveFile = chooseSaveFile();
+            lblStatusResult.setText("ok");
 
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            handler.openFile(saveFile);
+            lblStatusResult.setText("okx2");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    private Path openSaveFile() throws FileNotFoundException {
+    private Path chooseSaveFile() throws FileNotFoundException {
 
         JFileChooser openChooser = new JFileChooser(".");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("W2 Savegames - .xml", "xml");

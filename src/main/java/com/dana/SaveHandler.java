@@ -13,38 +13,19 @@ public class SaveHandler {
 
     BufferedReader reader;
     Map<String, String> xmlToJavaTagConvertor;
+    String content;
 
+    
 
-
-    public void openFile(Path file) {
+    public void openFile(Path file) throws IOException {
 
         Charset charset = Charset.forName("UTF-8");
-        try {
-            reader = Files.newBufferedReader(file, charset);
-
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
-        }
-
-
-
-
-
-
-
-        try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
-            int test = reader.read();
-            char test2 = (char) test;
-            System.out.println(test);
-            System.out.println(test2);
-        } catch (IOException x) {
-            System.err.format("IOException: %s%n", x);
-        }
+        content = new String(Files.readAllBytes(file), charset);
     }
 
-    public TagToken findTag(String) throws IOException {
-        Pattern pattern = Pattern.compile("expression");
-        Matcher matcher = pattern.matcher("kde hledat");
+    public void findTag(String tagToFind) throws IOException {
+        Pattern namePattern = Pattern.compile("name");
+        Matcher matcher = namePattern.matcher("kde hledat");
 
         int letter;
         do {
@@ -57,7 +38,6 @@ public class SaveHandler {
             tag += String.valueOf(letter);
         } while (letter != '>');
 
-        return tag;
 
     }
 
