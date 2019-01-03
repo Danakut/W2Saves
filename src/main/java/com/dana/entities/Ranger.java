@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Ranger {
 
-    String name;
+    public String name;
     String portraitName; //nebo radeji URI? Path?
     Gender gender;
     String religion;

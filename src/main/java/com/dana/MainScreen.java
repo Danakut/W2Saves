@@ -144,7 +144,7 @@ public class MainScreen extends JFrame {
 
     private Path chooseSaveFile() throws FileNotFoundException {
 
-        JFileChooser openChooser = new JFileChooser(".");
+        JFileChooser openChooser = new JFileChooser("./src/resources");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("W2 Savegames - .xml", "xml");
         openChooser.setFileFilter(filter);
         int returnVal = openChooser.showOpenDialog(contentPane);
