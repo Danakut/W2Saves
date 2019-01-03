@@ -70,31 +70,6 @@ public class SaveHandler {
         return list;
     }
 
-    private Ranger processPerson(String personInString) {
-        Ranger newPerson = new Ranger();
-        int startIndex;
-        int endIndex;
-        String resultString;
-        int resultInt;
-
-        //name
-        Pattern patternStart = Pattern.compile("<displayName>");
-        Matcher matcherStart = patternStart.matcher(personInString);
-        matcherStart.find();
-        startIndex = matcherStart.end();
-
-        Pattern patternEnd = Pattern.compile("</displayName>");
-        Matcher matcherEnd = patternEnd.matcher(personInString);
-        matcherEnd.find();
-        endIndex = matcherEnd.start();
-
-        resultString = personInString.substring(startIndex, endIndex).trim();
-        resultString = resultString.substring(3, resultString.length() - 3);
-
-        newPerson.name = resultString;
-        return newPerson;
-    }
-
     private List<Ranger> collectPersons() {
         List<Ranger> list = new ArrayList<>();
 
@@ -105,6 +80,40 @@ public class SaveHandler {
 
         return list;
     }
+
+    private Ranger processPerson(String personInString) {
+        Ranger newPerson = new Ranger();
+        String workingString;
+
+        workingString = findParticularProperty("displayName", personInString);
+        workingString = workingString.substring(3, workingString.length() - 3);
+        newPerson.name = workingString;
+        return newPerson;
+
+        //portrait
+
+    }
+
+    private String findParticularProperty(String patternString, String personInString) {
+        int startIndex;
+        int endIndex;
+        String resultString;
+
+        Pattern patternStart = Pattern.compile("<" + patternString + ">");
+        Matcher matcherStart = patternStart.matcher(personInString);
+        matcherStart.find();
+        startIndex = matcherStart.end();
+
+        Pattern patternEnd = Pattern.compile("</" + patternString + ">");
+        Matcher matcherEnd = patternEnd.matcher(personInString);
+        matcherEnd.find();
+        endIndex = matcherEnd.start();
+
+        resultString = personInString.substring(startIndex, endIndex).trim();
+        return resultString;
+    }
+
+
 
 
 
