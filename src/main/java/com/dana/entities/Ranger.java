@@ -6,15 +6,15 @@ import java.util.Map;
 public class Ranger {
 
     public String name;
-    String portraitName; //nebo radeji URI? Path?
-    Gender gender;
-    String religion;
-    String smokes;
-    String ethnicity;
-    String biography;
-    int skinColor;
-    int age;
-    int level;
+    public String portraitName; //nebo radeji URI? Path?
+    public Gender gender;
+    public String religion;
+    public String smokes;
+    public String ethnicity;
+    public String biography;
+    public int skinColor;
+    public int age;
+    public int level;
     int exp;
     int currentHp;
     int size;
@@ -73,9 +73,4 @@ public class Ranger {
         skills.put("atWeapons", 0);
     }
 
-}
-
-enum Gender {
-    MALE,
-    FEMALE
 }

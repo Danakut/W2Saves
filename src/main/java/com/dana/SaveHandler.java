@@ -1,5 +1,6 @@
 package com.dana;
 
+import com.dana.entities.Gender;
 import com.dana.entities.Ranger;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class SaveHandler {
     String testThis() {
         Ranger thisRanger = persons.get(0);
 //        String toTest = persons.get(0).name;
-        String toTest =  thisRanger.name;
+        String toTest =  thisRanger.gender.toString();
         return toTest;
     }
 
@@ -85,12 +86,57 @@ public class SaveHandler {
         Ranger newPerson = new Ranger();
         String workingString;
 
+        //name
         workingString = findParticularProperty("displayName", personInString);
         workingString = workingString.substring(3, workingString.length() - 3);
         newPerson.name = workingString;
-        return newPerson;
 
         //portrait
+        workingString = findParticularProperty("portraitName", personInString);
+        newPerson.portraitName = workingString;
+
+        //gender
+        workingString = findParticularProperty("gender", personInString);
+        if (workingString.equals("1")) {
+            newPerson.gender = Gender.MALE;
+        } else if (workingString.equals("2")) {
+            newPerson.gender = Gender.FEMALE;
+        } else {
+            newPerson.gender = Gender.UNKNOWN;
+        }
+
+        //religion
+        workingString = findParticularProperty("religion", personInString);
+        newPerson.religion = workingString;
+
+        //smokes
+        workingString = findParticularProperty("smokes", personInString);
+        newPerson.smokes = workingString;
+
+        //ethnicity
+        workingString = findParticularProperty("ethnicity", personInString);
+        newPerson.ethnicity = workingString;
+
+        //biography
+        workingString = findParticularProperty("biography", personInString);
+        newPerson.biography = workingString;
+        
+        //skin color
+        workingString = findParticularProperty("skinColor", personInString);
+        newPerson.skinColor = Integer.parseInt(workingString);
+
+        //age
+        workingString = findParticularProperty("age", personInString);
+        newPerson.age = Integer.parseInt(workingString);
+
+        //level
+        workingString = findParticularProperty("level", personInString);
+        newPerson.level = Integer.parseInt(workingString);
+
+
+
+
+        return newPerson;
 
     }
 
