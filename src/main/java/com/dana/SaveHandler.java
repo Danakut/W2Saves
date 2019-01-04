@@ -2,12 +2,15 @@ package com.dana;
 
 import com.dana.entities.Gender;
 import com.dana.entities.Ranger;
+import sun.text.resources.es.FormatData_es_EC;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +19,7 @@ public class SaveHandler {
     String content;
     List<String> personsInString;
     List<Ranger> persons;
+    int currentWorkingIndex;
 
     public SaveHandler() {
 
@@ -32,6 +36,7 @@ public class SaveHandler {
 
         personsInString = findPersons();
         persons = collectPersons();
+        currentWorkingIndex = 0;
     }
 
     void openFile(Path file) throws IOException {
@@ -120,7 +125,7 @@ public class SaveHandler {
         //biography
         workingString = findParticularProperty("biography", personInString);
         newPerson.biography = workingString;
-        
+
         //skin color
         workingString = findParticularProperty("skinColor", personInString);
         newPerson.skinColor = Integer.parseInt(workingString);
@@ -132,6 +137,51 @@ public class SaveHandler {
         //level
         workingString = findParticularProperty("level", personInString);
         newPerson.level = Integer.parseInt(workingString);
+
+        //xp
+        workingString = findParticularProperty("xp", personInString);
+        newPerson.exp = Integer.parseInt(workingString);
+
+        //current HP
+        workingString = findParticularProperty("curHp", personInString);
+        newPerson.currentHp = Integer.parseInt(workingString);
+
+        //size
+        workingString = findParticularProperty("size", personInString);
+        newPerson.size = Integer.parseInt(workingString);
+
+        //kills
+        workingString = findParticularProperty("noOfKills", personInString);
+        newPerson.numberOfKills = Integer.parseInt(workingString);
+
+        //damage done
+        workingString = findParticularProperty("damageDone", personInString);
+        newPerson.damageDone = Integer.parseInt(workingString);
+
+        //available attribute points
+        workingString = findParticularProperty("availableAttributePoints", personInString);
+        newPerson.availAttrPoints = Integer.parseInt(workingString);
+
+        //available skill points
+        workingString = findParticularProperty("availableSkillPoints", personInString);
+        newPerson.availSkillPoints = Integer.parseInt(workingString);
+
+        //available perk points
+        workingString = findParticularProperty("availableTraitPoints", personInString);
+        newPerson.availTraitPoints = Integer.parseInt(workingString);
+
+        //attributes
+        Map<String, Integer> newAttributes = new HashMap<>();
+
+//        workingString = findParticularProperty("availableTraitPoints", personInString);
+//        newPerson.availTraitPoints = Integer.parseInt(workingString);
+//        newAttributes.put("charisma", 0);
+//        newAttributes.put("intelligence", 0);
+//        newAttributes.put("speed", 0);
+//        newAttributes.put("strength", 0);
+//        newAttributes.put("awareness", 0);
+//        newAttributes.put("luck", 0);
+//        newAttributes.put("coordination", 0);
 
 
 
@@ -147,6 +197,7 @@ public class SaveHandler {
 
         Pattern patternStart = Pattern.compile("<" + patternString + ">");
         Matcher matcherStart = patternStart.matcher(personInString);
+        matcherStart.region(currentWorkingIndex, personInString.length());
         matcherStart.find();
         startIndex = matcherStart.end();
 
@@ -155,6 +206,7 @@ public class SaveHandler {
         matcherEnd.find();
         endIndex = matcherEnd.start();
 
+        currentWorkingIndex = matcherEnd.end();
         resultString = personInString.substring(startIndex, endIndex).trim();
         return resultString;
     }

@@ -15,19 +15,20 @@ public class Ranger {
     public int skinColor;
     public int age;
     public int level;
-    int exp;
-    int currentHp;
-    int size;
-    int numberOfKills;
-    int damageDone;
-    int availAttrPoints;
-    int availSkillPoints;
-    int availTraitPoints;
-    Item[] equipment;
-    Item[] inventory;
-    Map<String, Integer> attributes;
-    Map<String, Integer> skills;
-    Map<String, Integer> traits;
+    public int exp;
+    public int currentHp;
+    public int size;
+    public int numberOfKills;
+    public int damageDone;
+    public int availAttrPoints;
+    public int availSkillPoints;
+    public int availTraitPoints;
+    public Item[] equipment;
+    public Item[] inventory;
+    public Map<String, Integer> attributes;
+    public Map<String, Integer> skills;
+    public Map<String, Integer> traits;
+    public boolean isCNPC;
 
     public Ranger() {
         attributes = new HashMap<>();
