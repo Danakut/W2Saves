@@ -90,6 +90,7 @@ public class SaveHandler {
     private Ranger processPerson(String personInString) {
         Ranger newPerson = new Ranger();
         String workingString;
+        currentWorkingIndex = 0;
 
         //name
         workingString = findParticularProperty("displayName", personInString);
