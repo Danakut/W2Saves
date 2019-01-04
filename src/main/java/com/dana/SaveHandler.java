@@ -2,6 +2,7 @@ package com.dana;
 
 import com.dana.entities.Gender;
 import com.dana.entities.Ranger;
+import javafx.util.Pair;
 import sun.text.resources.es.FormatData_es_EC;
 
 import java.io.IOException;
@@ -174,8 +175,8 @@ public class SaveHandler {
         //attributes
         Map<String, Integer> newAttributes = new HashMap<>();
 
-//        workingString = findParticularProperty("availableTraitPoints", personInString);
-//        newPerson.availTraitPoints = Integer.parseInt(workingString);
+        String properties = findParticularProperty("attributes", personInString);
+        Pair<String, Integer> workingPair = findKeyValuePair("charisma", properties);
 //        newAttributes.put("charisma", 0);
 //        newAttributes.put("intelligence", 0);
 //        newAttributes.put("speed", 0);
@@ -210,6 +211,21 @@ public class SaveHandler {
         currentWorkingIndex = matcherEnd.end();
         resultString = personInString.substring(startIndex, endIndex).trim();
         return resultString;
+    }
+
+    private Pair<String, Integer> findKeyValuePair(String keyString, String stringToSearch) {
+        Pattern keyPattern = Pattern.compile(keyString);
+        Matcher keyMatch = keyPattern.matcher(stringToSearch);
+        keyMatch.find();
+        int searchFrom = keyMatch.end();
+
+        Pattern valuePattern = Pattern.compile("\\d+");
+        Matcher valueMatch = valuePattern.matcher(stringToSearch);
+        valueMatch.region(searchFrom, stringToSearch.length());
+        valueMatch.find();
+        String valueString = valueMatch.group();
+
+        return new Pair<>(keyString, Integer.valueOf(valueString));
     }
 
 
