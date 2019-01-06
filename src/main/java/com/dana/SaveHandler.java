@@ -1,5 +1,7 @@
 package com.dana;
 
+import com.dana.Exceptions.KeyNotFoundException;
+import com.dana.Exceptions.ValueNotFoundException;
 import com.dana.entities.Gender;
 import com.dana.entities.Ranger;
 import javafx.util.Pair;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletionException;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,7 +98,7 @@ public class SaveHandler {
         return list;
     }
 
-    private Ranger processPerson(String personInString) {
+    private Ranger processPerson(String personInString) throws CompletionException {
         Ranger newPerson = new Ranger();
         String workingString;
         currentWorkingIndex = 0;
@@ -184,29 +187,61 @@ public class SaveHandler {
         String properties = findParticularProperty("attributes", personInString);
 
         for (int i = 0; i < ATTRIBUTE_ARRAY.length; i++) {
-            Pair<String, Integer> workingPair = findKeyValuePair(ATTRIBUTE_ARRAY[i], properties);
+            Pair<String, Integer> workingPair = null;
+            try {
+                workingPair = findKeyValuePair(ATTRIBUTE_ARRAY[i], properties);
+            } catch (Exception ex) {
+                throw new CompletionException("Processing person \"" + newPerson.name + "\" failed at Attributes", ex);
+            }
             newAttributes.put(workingPair.getKey(), workingPair.getValue());
         }
+
         newPerson.attributes = newAttributes;
+        newAttributes = null;
 
         //skills
         Map<String, Integer> newSkills = new HashMap<>();
         properties = findParticularProperty("skillXps", personInString);
 
         for (int i = 0; i < SKILL_ARRAY.length; i++) {
-            Pair<String, Integer> workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
+            Pair<String, Integer> workingPair = null;
+            try {
+                workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
+            } catch (Exception ex) {
+                throw new CompletionException("Processing person \"" + newPerson.name + "\" failed at Skills", ex);
+            }
             newSkills.put(workingPair.getKey(), workingPair.getValue());
         }
+
         newPerson.skills = newSkills;
+        newSkills = null;
 
+        //traits
+        //TODo dopracovat - nelze zpracovavat skrze predem dane pole
+        //TODo vymenit CompletionException za neco jineho (vlastniho), tahle je z baliku Concurrent
+        Map<String, Integer> newTraits = new HashMap<>();
+        properties = findParticularProperty("traits", personInString);
 
-
-
+        for (int i = 0; i < SKILL_ARRAY.length; i++) {
+            Pair<String, Integer> workingPair = null;
+            try {
+                workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
+            } catch (KeyNotFoundException e) {
+                e.printStackTrace();
+            } catch (ValueNotFoundException e) {
+                e.printStackTrace();
+            }
+            newSkills.put(workingPair.getKey(), workingPair.getValue());
+        }
+        newPerson.traits = newTraits;
+        newTraits = null;
 
         return newPerson;
     }
 
     private String findParticularProperty(String patternString, String personInString) {
+
+        //TODO pridat exceptions pro zpracovani
         int startIndex;
         int endIndex;
         String resultString;
@@ -227,17 +262,25 @@ public class SaveHandler {
         return resultString;
     }
 
-    private Pair<String, Integer> findKeyValuePair(String keyString, String stringToSearch) {
+    private Pair<String, Integer> findKeyValuePair(String keyString, String stringToSearch) throws KeyNotFoundException, ValueNotFoundException {
         Pattern keyPattern = Pattern.compile(keyString);
         Matcher keyMatch = keyPattern.matcher(stringToSearch);
-        keyMatch.find();
-        int searchFrom = keyMatch.end();
+        int searchFrom = -1;
+        if (keyMatch.find()) {
+            searchFrom = keyMatch.end();
+        } else {
+            throw new KeyNotFoundException("Key \"" + keyString + "\" expected; no such key found.");
+        }
 
         Pattern valuePattern = Pattern.compile("\\d+");
         Matcher valueMatch = valuePattern.matcher(stringToSearch);
         valueMatch.region(searchFrom, stringToSearch.length());
-        valueMatch.find();
-        String valueString = valueMatch.group();
+        String valueString = null;
+        if (valueMatch.find()) {
+            valueString = valueMatch.group();
+        } else {
+            throw new ValueNotFoundException("A value for key \"" + keyString + "\" expected; no value found.");
+        }
 
         return new Pair<>(keyString, Integer.valueOf(valueString));
     }

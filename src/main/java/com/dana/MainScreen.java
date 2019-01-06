@@ -4,6 +4,7 @@
 
 package com.dana;
 
+import com.dana.entities.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,8 +34,11 @@ public class MainScreen extends JFrame {
         // Generated using JFormDesigner non-commercial license
         btnOpenFile = new JButton();
         lblR1Name = new JLabel();
+        lblR2Name = new JLabel();
         lblR1Icon = new JLabel();
+        lblR2Icon = new JLabel();
         lblR1AP = new JLabel();
+        lblR2AP = new JLabel();
         lblStatus = new JLabel();
         lblStatusResult = new JLabel();
 
@@ -78,13 +82,25 @@ public class MainScreen extends JFrame {
         lblR1Name.setText("text");
         contentPane.add(lblR1Name, "cell 1 1");
 
+        //---- lblR2Name ----
+        lblR2Name.setText("text");
+        contentPane.add(lblR2Name, "cell 2 1");
+
         //---- lblR1Icon ----
         lblR1Icon.setText("text");
         contentPane.add(lblR1Icon, "cell 1 2");
 
+        //---- lblR2Icon ----
+        lblR2Icon.setText("text");
+        contentPane.add(lblR2Icon, "cell 2 2");
+
         //---- lblR1AP ----
         lblR1AP.setText("text");
         contentPane.add(lblR1AP, "cell 1 3");
+
+        //---- lblR2AP ----
+        lblR2AP.setText("text");
+        contentPane.add(lblR2AP, "cell 2 3");
 
         //---- lblStatus ----
         lblStatus.setText("Status");
@@ -103,8 +119,11 @@ public class MainScreen extends JFrame {
     // Generated using JFormDesigner non-commercial license
     private JButton btnOpenFile;
     private JLabel lblR1Name;
+    private JLabel lblR2Name;
     private JLabel lblR1Icon;
+    private JLabel lblR2Icon;
     private JLabel lblR1AP;
+    private JLabel lblR2AP;
     private JLabel lblStatus;
     private JLabel lblStatusResult;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
@@ -128,6 +147,8 @@ public class MainScreen extends JFrame {
             e.printStackTrace();
         }
 
+        //ToDo show a file detail (e.g. date of save) and ask whether this is the desired file; only then open (or let user choose again)
+
         try {
             handler.openFile(saveFile);
             handler.init();
@@ -137,8 +158,7 @@ public class MainScreen extends JFrame {
             ex.printStackTrace();
         }
 
-        String test = handler.testThis();
-        lblStatusResult.setText(test);
+        displayPerson(handler.persons.get(1));
     }
 
 
@@ -159,5 +179,10 @@ public class MainScreen extends JFrame {
         }
 
         return saveFile;
+    }
+
+    private void displayPerson (Ranger person) {
+        lblR1Name.setText(person.name);
+
     }
 }

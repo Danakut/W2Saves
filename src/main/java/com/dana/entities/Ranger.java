@@ -30,6 +30,8 @@ public class Ranger {
     public Map<String, Integer> traits;
     public boolean isCNPC;
 
+
+
     public Ranger() {
 //        attributes = new HashMap<>();
 //        attributes.put("charisma", 0);
