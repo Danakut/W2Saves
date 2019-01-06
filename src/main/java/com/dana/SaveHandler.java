@@ -11,16 +11,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SaveHandler {
 
-    private final static String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
-    private final static String[] SKILL_ARRAY = {"weaponSmith", "toasterRepair", "spotLie", "sniperRifle", "smg", "shotgun",
+    public static final Logger logger = Logger.getLogger(App.class.getName());
+
+    private static final String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
+    private static final  String[] SKILL_ARRAY = {"weaponSmith", "toasterRepair", "spotLie", "sniperRifle", "smg", "shotgun",
             "safecrack", "rifle", "pickLock", "perception", "outdoorsman", "mechanicalRepair", "manipulate", "leadership",
             "intimidate", "handgun", "fieldMedic", "energyWeapons", "doctor", "demolitions", "computerTech", "combatShooting",
-            "calvinBackerskill", "bruteForce", "brawling", "bluntWeapons", "bladedWeapons", "barter", "animalWhisperer", "alarmDisarm",
+            "calvinBackerSkill", "bruteForce", "brawling", "bluntWeapons", "bladedWeapons", "barter", "animalWhisperer", "alarmDisarm",
             "atWeapons"};
 
     String content;
@@ -35,14 +38,13 @@ public class SaveHandler {
 
     String testThis() {
         Ranger thisRanger = persons.get(0);
-//        String toTest = persons.get(0).name;
         String toTest =  thisRanger.gender.toString();
         return toTest;
     }
 
     void init() throws Exception {
 
-        personsInString = findPersons();
+        personsInString = findPersonStrings();
         persons = collectPersons();
         currentWorkingIndex = 0;
     }
@@ -51,9 +53,10 @@ public class SaveHandler {
 
         Charset charset = Charset.forName("UTF-8");
         content = new String(Files.readAllBytes(file), charset);
+        logger.info("File " + file.toString() + " opened.");
     }
 
-    private List<String> findPersons() throws Exception {
+    private List<String> findPersonStrings() throws Exception {
         List<String> list = new ArrayList<>();
 
         Pattern pattern = Pattern.compile("<pc>");
@@ -86,6 +89,7 @@ public class SaveHandler {
         for (int i = 0; i < personsInString.size(); i++) {
             Ranger ranger = processPerson(personsInString.get(i));
             list.add(ranger);
+            logger.info("Person " + i + " added to the list of Ranger objects.");
         }
 
         return list;
@@ -185,12 +189,21 @@ public class SaveHandler {
         }
         newPerson.attributes = newAttributes;
 
+        //skills
+        Map<String, Integer> newSkills = new HashMap<>();
+        properties = findParticularProperty("skillXps", personInString);
+
+        for (int i = 0; i < SKILL_ARRAY.length; i++) {
+            Pair<String, Integer> workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
+            newSkills.put(workingPair.getKey(), workingPair.getValue());
+        }
+        newPerson.skills = newSkills;
+
 
 
 
 
         return newPerson;
-
     }
 
     private String findParticularProperty(String patternString, String personInString) {
