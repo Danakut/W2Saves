@@ -3,7 +3,6 @@ package com.dana;
 import com.dana.entities.Gender;
 import com.dana.entities.Ranger;
 import javafx.util.Pair;
-import sun.text.resources.es.FormatData_es_EC;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -17,10 +16,18 @@ import java.util.regex.Pattern;
 
 public class SaveHandler {
 
+    private final static String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
+    private final static String[] SKILL_ARRAY = {"weaponSmith", "toasterRepair", "spotLie", "sniperRifle", "smg", "shotgun",
+            "safecrack", "rifle", "pickLock", "perception", "outdoorsman", "mechanicalRepair", "manipulate", "leadership",
+            "intimidate", "handgun", "fieldMedic", "energyWeapons", "doctor", "demolitions", "computerTech", "combatShooting",
+            "calvinBackerskill", "bruteForce", "brawling", "bluntWeapons", "bladedWeapons", "barter", "animalWhisperer", "alarmDisarm",
+            "atWeapons"};
+
     String content;
     List<String> personsInString;
     List<Ranger> persons;
     int currentWorkingIndex;
+
 
     public SaveHandler() {
 
@@ -45,10 +52,6 @@ public class SaveHandler {
         Charset charset = Charset.forName("UTF-8");
         content = new String(Files.readAllBytes(file), charset);
     }
-
-
-
-
 
     private List<String> findPersons() throws Exception {
         List<String> list = new ArrayList<>();
@@ -174,16 +177,14 @@ public class SaveHandler {
 
         //attributes
         Map<String, Integer> newAttributes = new HashMap<>();
-
         String properties = findParticularProperty("attributes", personInString);
-        Pair<String, Integer> workingPair = findKeyValuePair("charisma", properties);
-//        newAttributes.put("charisma", 0);
-//        newAttributes.put("intelligence", 0);
-//        newAttributes.put("speed", 0);
-//        newAttributes.put("strength", 0);
-//        newAttributes.put("awareness", 0);
-//        newAttributes.put("luck", 0);
-//        newAttributes.put("coordination", 0);
+
+        for (int i = 0; i < ATTRIBUTE_ARRAY.length; i++) {
+            Pair<String, Integer> workingPair = findKeyValuePair(ATTRIBUTE_ARRAY[i], properties);
+            newAttributes.put(workingPair.getKey(), workingPair.getValue());
+        }
+        newPerson.attributes = newAttributes;
+
 
 
 
