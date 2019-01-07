@@ -324,6 +324,7 @@ public class SaveHandler {
         return list;
     }
 
+    //processes list "personsInString" into a list of Ranger objects
     private List<Ranger> collectPersons() {
         List<Ranger> list = new ArrayList<>();
 
@@ -343,6 +344,7 @@ public class SaveHandler {
         return list;
     }
 
+    //processes a string detailing one person into a Ranger object
     private Ranger processPerson(String personInString) throws PropertyNotAssembledException {
         Ranger newPerson = new Ranger();
         String workingString;
@@ -442,7 +444,6 @@ public class SaveHandler {
         }
 
         newPerson.attributes = newAttributes;
-        newAttributes = null;
 
         //skills
         Map<String, Integer> newSkills = new HashMap<>();
@@ -459,7 +460,6 @@ public class SaveHandler {
         }
 
         newPerson.skills = newSkills;
-        newSkills = null;
 
         //traits
         properties = findParticularProperty("traits", personInString);
@@ -489,35 +489,38 @@ public class SaveHandler {
         }
 
         newPerson.traits = newTraits;
-        newTraits = null;
 
         return newPerson;
     }
 
     private String findParticularProperty(String patternString, String personInString) {
 
-        int startIndex;
-        int endIndex;
-        String resultString;
-
+        //find the (end of the) opening tag (search from the index where we're currently at)
         Pattern patternStart = Pattern.compile("<" + patternString + ">");
         Matcher matcherStart = patternStart.matcher(personInString);
         matcherStart.region(currentWorkingIndex, personInString.length());
         matcherStart.find();
-        startIndex = matcherStart.end();
+        int startIndex = matcherStart.end();
 
+        //find the (beginning of the) closing tag ( --||-- )
         Pattern patternEnd = Pattern.compile("</" + patternString + ">");
         Matcher matcherEnd = patternEnd.matcher(personInString);
         matcherEnd.region(currentWorkingIndex, personInString.length());
         matcherEnd.find();
-        endIndex = matcherEnd.start();
+        int endIndex = matcherEnd.start();
 
+        //set the point we're currently add after the closing tag of our current search
         currentWorkingIndex = matcherEnd.end();
-        resultString = personInString.substring(startIndex, endIndex).trim();
+
+        String resultString = personInString.substring(startIndex, endIndex).trim();
         return resultString;
     }
 
+    //this method receives only a part of a person string and therefore doesn't work with currentWorkingIndex. All "keys" within this partial string
+    //are unique (unlike tags that are looked for in findParticularProperty), so no starting index is needed.
     private Pair<String, Integer> findKeyValuePair(String keyString, String stringToSearch) throws KeyNotFoundException, ValueNotFoundException {
+
+        //look for a particular attribute/skill name (not tag)
         Pattern keyPattern = Pattern.compile(keyString);
         Matcher keyMatch = keyPattern.matcher(stringToSearch);
         int searchFrom = -1;
@@ -527,6 +530,7 @@ public class SaveHandler {
             throw new KeyNotFoundException("Key \"" + keyString + "\" expected; no such key found.");
         }
 
+        //look for the corresponding value (first number after the name)
         Pattern valuePattern = Pattern.compile("\\d+");
         Matcher valueMatch = valuePattern.matcher(stringToSearch);
         valueMatch.region(searchFrom, stringToSearch.length());
@@ -540,6 +544,8 @@ public class SaveHandler {
         return new Pair<>(keyString, Integer.valueOf(valueString));
     }
 
+    //for finding trait pairs, a different method than findKeyValuePair() is needed (KV walks through an array where every key is present).
+    //With traits, only a handful from the big (<100 entries) array will be present - no need to search for corresponding values for each of them.
     private List<Pair<String, Integer>> findTraitPairs(String stringToSearch) {
         List<Pair<String, Integer>> list = new ArrayList<>();
         int pairIndex = 0;
@@ -553,25 +559,31 @@ public class SaveHandler {
         Matcher matcherEndPair = patternEndPair.matcher(stringToSearch);
 
         do {
+            //find a <key> tag
             matcherStart.region(pairIndex, stringToSearch.length());
             matcherStart.find();
             int startIndex = matcherStart.end();
 
             //TODO prenest napad z tohohle radku i do ostatnich mist? (.region(startIndex...)
+            //find a </key> tag
             matcherEnd.region(startIndex, stringToSearch.length());
             matcherEnd.find();
             int endIndex = matcherEnd.start();
 
+            //record the String between the tags above
             String resultString = stringToSearch.substring(startIndex, endIndex);
 
+            //record corresponding value - first number after </key>
             valueMatch.region(endIndex, stringToSearch.length());
             valueMatch.find();
             int value = Integer.valueOf(valueMatch.group());
 
+            //search for </pair> and mark the starting index for the next pair search
             matcherEndPair.region(valueMatch.end(), stringToSearch.length());
             matcherEndPair.find();
             pairIndex = matcherEndPair.end();
 
+            //add the pair to the list of trait xml names and their values
             list.add(new Pair<String, Integer>(resultString, value));
 
         } while (!(pairIndex == stringToSearch.length()));
