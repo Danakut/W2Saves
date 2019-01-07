@@ -1,6 +1,7 @@
 package com.dana.entities;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Ranger {
@@ -27,7 +28,8 @@ public class Ranger {
     public Item[] inventory;
     public Map<String, Integer> attributes;
     public Map<String, Integer> skills;
-    public Map<String, Integer> traits;
+    public List<Trait> quirks;
+    public List<Trait> traits;
     public boolean isCNPC;
 
 
