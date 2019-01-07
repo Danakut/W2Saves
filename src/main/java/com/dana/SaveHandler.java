@@ -61,6 +61,10 @@ public class SaveHandler {
     private static Trait[] initTraitArray() {
         Trait[] array = new Trait[112];
 
+        for (int i = 0; i < array.length ; i++) {
+            array[i] = new Trait();
+        }
+
         array[0].setDisplayName("Animal Husbandry");
         array[0].setXmlName("");
         array[0].setIsQuirk(true);
@@ -283,7 +287,6 @@ public class SaveHandler {
         array[110].setDisplayName("Zen Shooter");
         array[111].setDisplayName("Zeroed");
 
-
         return array;
     }
 
@@ -459,35 +462,40 @@ public class SaveHandler {
         newSkills = null;
 
         //traits
-        List<Trait> newTraits = new ArrayList<>();
         properties = findParticularProperty("traits", personInString);
+        List<Trait> newTraits = new ArrayList<>();
+
         if (!properties.equals("")) {
+            List<Pair<String, Integer>> traitPairs = findTraitPairs(properties);
 
-            Trait trait = new Trait();
+            for (Pair<String, Integer> trait : traitPairs) {
+                for (int i = 0; i < TRAIT_ARRAY.length; i++) {
+                    if (trait.getKey().equals(TRAIT_ARRAY[i].getXmlName())) {
+                        Trait arrayTrait = TRAIT_ARRAY[i];
+                        Trait newTrait = new Trait();
+                        newTrait.setDisplayName(arrayTrait.getDisplayName());
+                        newTrait.setXmlName(trait.getKey());
+                        newTrait.setIsQuirk(arrayTrait.getIsQuirk());
+                        newTrait.setValue(trait.getValue());
+                        newTrait.setEffect(arrayTrait.getEffect());
+                        newTrait.setDrawback(arrayTrait.getDrawback());
 
-
-
-
-            for (int i = 0; i < SKILL_ARRAY.length; i++) {
-                Pair<String, Integer> workingPair = null;
-                try {
-                    workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
-                } catch (KeyNotFoundException e) {
-                    e.printStackTrace();
-                } catch (ValueNotFoundException e) {
-                    e.printStackTrace();
+                        newTraits.add(newTrait);
+                        break;
+                    }
                 }
-                newSkills.put(workingPair.getKey(), workingPair.getValue());
             }
-            newPerson.traits = newTraits;
+
         }
+
+        newPerson.traits = newTraits;
+        newTraits = null;
 
         return newPerson;
     }
 
     private String findParticularProperty(String patternString, String personInString) {
 
-        //TODO pridat exceptions pro zpracovani
         int startIndex;
         int endIndex;
         String resultString;
@@ -500,6 +508,7 @@ public class SaveHandler {
 
         Pattern patternEnd = Pattern.compile("</" + patternString + ">");
         Matcher matcherEnd = patternEnd.matcher(personInString);
+        matcherEnd.region(currentWorkingIndex, personInString.length());
         matcherEnd.find();
         endIndex = matcherEnd.start();
 
@@ -529,6 +538,45 @@ public class SaveHandler {
         }
 
         return new Pair<>(keyString, Integer.valueOf(valueString));
+    }
+
+    private List<Pair<String, Integer>> findTraitPairs(String stringToSearch) {
+        List<Pair<String, Integer>> list = new ArrayList<>();
+        int pairIndex = 0;
+        Pattern patternStart = Pattern.compile("<key>");
+        Matcher matcherStart = patternStart.matcher(stringToSearch);
+        Pattern patternEnd = Pattern.compile("</key>");
+        Matcher matcherEnd = patternEnd.matcher(stringToSearch);
+        Pattern valuePattern = Pattern.compile("\\d+");
+        Matcher valueMatch = valuePattern.matcher(stringToSearch);
+        Pattern patternEndPair = Pattern.compile("</pair>");
+        Matcher matcherEndPair = patternEndPair.matcher(stringToSearch);
+
+        do {
+            matcherStart.region(pairIndex, stringToSearch.length());
+            matcherStart.find();
+            int startIndex = matcherStart.end();
+
+            //TODO prenest napad z tohohle radku i do ostatnich mist? (.region(startIndex...)
+            matcherEnd.region(startIndex, stringToSearch.length());
+            matcherEnd.find();
+            int endIndex = matcherEnd.start();
+
+            String resultString = stringToSearch.substring(startIndex, endIndex);
+
+            valueMatch.region(endIndex, stringToSearch.length());
+            valueMatch.find();
+            int value = Integer.valueOf(valueMatch.group());
+
+            matcherEndPair.region(valueMatch.end(), stringToSearch.length());
+            matcherEndPair.find();
+            pairIndex = matcherEndPair.end();
+
+            list.add(new Pair<String, Integer>(resultString, value));
+
+        } while (!(pairIndex == stringToSearch.length()));
+
+        return list;
     }
 
 
