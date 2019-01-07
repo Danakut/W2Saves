@@ -1,6 +1,7 @@
 package com.dana;
 
 import com.dana.Exceptions.KeyNotFoundException;
+import com.dana.Exceptions.PropertyNotAssembledException;
 import com.dana.Exceptions.ValueNotFoundException;
 import com.dana.entities.Gender;
 import com.dana.entities.Ranger;
@@ -90,15 +91,22 @@ public class SaveHandler {
         List<Ranger> list = new ArrayList<>();
 
         for (int i = 0; i < personsInString.size(); i++) {
-            Ranger ranger = processPerson(personsInString.get(i));
+            Ranger ranger = null;
+            try {
+                ranger = processPerson(personsInString.get(i));
+
+                logger.info("Person " + i + " added to the list of Ranger objects.");
+            } catch (PropertyNotAssembledException e) {
+                logger.info("Person " + i + " could not be processed. Moving on.");
+            }
+
             list.add(ranger);
-            logger.info("Person " + i + " added to the list of Ranger objects.");
         }
 
         return list;
     }
 
-    private Ranger processPerson(String personInString) throws CompletionException {
+    private Ranger processPerson(String personInString) throws PropertyNotAssembledException {
         Ranger newPerson = new Ranger();
         String workingString;
         currentWorkingIndex = 0;
@@ -191,7 +199,7 @@ public class SaveHandler {
             try {
                 workingPair = findKeyValuePair(ATTRIBUTE_ARRAY[i], properties);
             } catch (Exception ex) {
-                throw new CompletionException("Processing person \"" + newPerson.name + "\" failed at Attributes", ex);
+                throw new PropertyNotAssembledException("Processing person \"" + newPerson.name + "\" failed at Attributes", ex);
             }
             newAttributes.put(workingPair.getKey(), workingPair.getValue());
         }
@@ -208,7 +216,7 @@ public class SaveHandler {
             try {
                 workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
             } catch (Exception ex) {
-                throw new CompletionException("Processing person \"" + newPerson.name + "\" failed at Skills", ex);
+                throw new PropertyNotAssembledException("Processing person \"" + newPerson.name + "\" failed at Skills", ex);
             }
             newSkills.put(workingPair.getKey(), workingPair.getValue());
         }
@@ -217,24 +225,24 @@ public class SaveHandler {
         newSkills = null;
 
         //traits
-        //TODo dopracovat - nelze zpracovavat skrze predem dane pole
-        //TODo vymenit CompletionException za neco jineho (vlastniho), tahle je z baliku Concurrent
-        Map<String, Integer> newTraits = new HashMap<>();
-        properties = findParticularProperty("traits", personInString);
-
-        for (int i = 0; i < SKILL_ARRAY.length; i++) {
-            Pair<String, Integer> workingPair = null;
-            try {
-                workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
-            } catch (KeyNotFoundException e) {
-                e.printStackTrace();
-            } catch (ValueNotFoundException e) {
-                e.printStackTrace();
-            }
-            newSkills.put(workingPair.getKey(), workingPair.getValue());
-        }
-        newPerson.traits = newTraits;
-        newTraits = null;
+//        //TODo dopracovat - nelze zpracovavat skrze predem dane pole
+//        //TODo vymenit CompletionException za neco jineho (vlastniho), tahle je z baliku Concurrent
+//        Map<String, Integer> newTraits = new HashMap<>();
+//        properties = findParticularProperty("traits", personInString);
+//
+//        for (int i = 0; i < SKILL_ARRAY.length; i++) {
+//            Pair<String, Integer> workingPair = null;
+//            try {
+//                workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
+//            } catch (KeyNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (ValueNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//            newSkills.put(workingPair.getKey(), workingPair.getValue());
+//        }
+//        newPerson.traits = newTraits;
+//        newTraits = null;
 
         return newPerson;
     }
