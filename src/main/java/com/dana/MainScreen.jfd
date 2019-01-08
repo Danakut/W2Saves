@@ -5,68 +5,283 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
-			"$rowConstraints": "[][][][][][][][][][][][]"
+			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+			"$rowConstraints": "[][][]"
 		} ) {
 			name: "this"
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "btnOpenFile"
-				"text": "Open File"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnOpenFileActionClicked", false ) )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 0"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblR1Name"
-				"text": "text"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3,alignx center"
+				"$columnConstraints": "[fill][fill]"
+				"$rowConstraints": "[][][][][][][][][][][][][][][][][][][][][][][][][][][]"
+			} ) {
+				name: "pnlRanger"
+				"background": sfield java.awt.Color black
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblName"
+					"text": "Alys Dorne"
+					"foreground": new java.awt.Color( 243, 144, 47, 255 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( "DejaVu Sans", 1, 10, false )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblRank"
+					"text": "Technical Sergeant"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 1"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblIcon"
+					"text": "pic here"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 2"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblAP"
+					"text": "AP 8"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 3"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblLevel"
+					"text": "Level 14"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 3"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCon"
+					"text": "CON 126 / 137"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 4"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblExp"
+					"text": "Exp 13 964 / 14 100"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 5"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCombatInit"
+					"text": "Combat Initiative"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 6"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCombatInitValue"
+					"text": "10"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 6"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCombatSpeed"
+					"text": "Combat Speed"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 7"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCombatSpeedValue"
+					"text": "2.1"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 7"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCritChance"
+					"text": "Critical Chance"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 8"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCritChanceValue"
+					"text": "38 %"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 8"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblArmor"
+					"text": "Armor"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 9"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblArmorValue"
+					"text": "2"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 9"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblEvasion"
+					"text": "Evasion"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 10"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblEvasionValue"
+					"text": "6 %"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 10"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCoordination"
+					"text": "Coordination"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 13"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCoordinationValue"
+					"text": "2"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 13,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblLuck"
+					"text": "Luck"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 14"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblLuckValue"
+					"text": "2"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 14,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblAwareness"
+					"text": "Awareness"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 15"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblAwarenessValue"
+					"text": "3"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 15,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblStrength"
+					"text": "Strength"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 16"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblStrengthValue"
+					"text": "2"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 16,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblSpeed"
+					"text": "Speed"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 17"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblSpeedValue"
+					"text": "4"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 17,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblIntelligence"
+					"text": "Intelligence"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 18"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblIntelligenceValue"
+					"text": "10"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 18,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCharisma"
+					"text": "Charisma"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 19"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCharismaValue"
+					"text": "6"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 19,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblSmartAss"
+					"text": "Smart Ass"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 22"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblSmartAssValue"
+					"text": "6"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 22,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblHandguns"
+					"text": "Handguns"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 23"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblHandgunsValue"
+					"text": "6"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 23,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblKissAss"
+					"text": "Kiss Ass"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 24"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblKissAssValue"
+					"text": "4"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 24,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblSurgeon"
+					"text": "Surgeon"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 25"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblSurgeonlblSurgeonValue"
+					"text": "4"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 25,alignx trailing,growx 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCompScience"
+					"text": "Computer Science"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 26"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lblCompScienceValue"
+					"text": "4"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 26,alignx trailing,growx 0"
+				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 1 1"
 			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblR2Name"
-				"text": "text"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 1"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblR1Icon"
-				"text": "text"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 2"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblR2Icon"
-				"text": "text"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 2"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblR1AP"
-				"text": "text"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 3"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblR2AP"
-				"text": "text"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 3"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblStatus"
-				"text": "Status"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 11"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lblStatusResult"
-				"text": "text"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 11"
-			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "mnbMenus"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mnFile"
+					"text": "File"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "mItemLoadFile"
+						"text": "Load Savegame into Editor"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mItemLoadFileActionPerformed", false ) )
+					} )
+				} )
+			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 845, 650 )
+			"size": new java.awt.Dimension( 950, 1005 )
 		} )
 	}
 }
