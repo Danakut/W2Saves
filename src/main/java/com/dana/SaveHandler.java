@@ -344,6 +344,14 @@ public class SaveHandler {
         return list;
     }
 
+    public int getRangerCount() {
+        return persons.size();
+    }
+
+    public Ranger getRanger(int listIndex) {
+        return persons.get(listIndex);
+    }
+
     //processes a string detailing one person into a Ranger object
     private Ranger processPerson(String personInString) throws PropertyNotAssembledException {
         Ranger newPerson = new Ranger();

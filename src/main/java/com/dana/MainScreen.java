@@ -27,7 +27,7 @@ public class MainScreen extends JFrame {
         myInit();
     }
 
-    Container contentPane;
+    Container myContentPane;
     SaveHandler handler;
 
     private List<JPanel> listRanger;
@@ -424,21 +424,19 @@ public class MainScreen extends JFrame {
 
     private void myInit() {
 
-        contentPane = getContentPane();
-        contentPane.setPreferredSize(new Dimension(1000, 800));
+        myContentPane = getContentPane();
+        myContentPane.setPreferredSize(new Dimension(1000, 800));
         initPanelVariables();
         this.pack();
 
+        handler = new SaveHandler();
 
         //TODO toto jsou pokusy - pozdeji vymazat
-//        contentPane.add(addRangerPanel(0), "cell 2 1");
-//        contentPane.add(addRangerPanel(1), "cell 3 1");
-        contentPane.add(new RangerPanel(), "cell 2 1");
+//        myContentPane.add(addRangerPanel(0), "cell 2 1");
+//        myContentPane.add(addRangerPanel(1), "cell 3 1");
 
 
-        pack();
 
-        handler = new SaveHandler();
     }
 
     private void initPanelVariables() {
@@ -476,7 +474,7 @@ public class MainScreen extends JFrame {
         listCharismaValue = new ArrayList<>();
     }
 
-    //create a panel that will display Ranger information - return value must be appended to contentPane to be visible
+    //create a panel that will display Ranger information - return value must be appended to myContentPane to be visible
     private JPanel addRangerPanel(int rangerIndex) {
 
         final Color panelTextColor = new Color(243, 144, 47);
@@ -780,7 +778,9 @@ public class MainScreen extends JFrame {
             ex.printStackTrace();
         }
 
-        displayPerson(handler.persons.get(1));
+        for (int i = 0; i < handler.getRangerCount(); i++) {
+            displayPerson(handler.getRanger(i), i+2);
+        }
     }
 
 
@@ -789,21 +789,23 @@ public class MainScreen extends JFrame {
         JFileChooser openChooser = new JFileChooser("./src/resources");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("W2 Savegames - .xml", "xml");
         openChooser.setFileFilter(filter);
-        int returnVal = openChooser.showOpenDialog(contentPane);
+        int returnVal = openChooser.showOpenDialog(myContentPane);
         if (returnVal != JFileChooser.APPROVE_OPTION) {
             throw new FileNotFoundException("Výběr souboru k nahrání zrušen uživatelem.");
         }
         Path saveFile = openChooser.getSelectedFile().toPath();
 
         if (!Files.exists(saveFile)) {
-            JOptionPane.showMessageDialog(contentPane, "Vybraný soubor nebyl nalezen.");
+            JOptionPane.showMessageDialog(myContentPane, "Vybraný soubor nebyl nalezen.");
             throw new FileNotFoundException("Vybraný soubor nebyl nalezen.");
         }
 
         return saveFile;
     }
 
-    private void displayPerson (Ranger person) {
+    private void displayPerson (Ranger person, int column) {
+        myContentPane.add(new RangerPanel(person), "cell " + column + " 1");
+        pack();
 
     }
 }

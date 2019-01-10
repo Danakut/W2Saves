@@ -1,5 +1,6 @@
 package com.dana;
 
+import com.dana.entities.Ranger;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -10,9 +11,10 @@ import java.awt.*;
 
 public class RangerPanel extends JPanel {
 
+    Ranger ranger;
+
     final Color panelTextColor = new Color(243, 144, 47);
     final Color panelBackground = Color.black;
-
 
     private JPanel pnlAttributes;
 
@@ -58,7 +60,8 @@ public class RangerPanel extends JPanel {
     private JLabel lblCompScience;
     private JLabel lblCompScienceValue;
 
-    public RangerPanel() {
+    public RangerPanel(Ranger ranger) {
+        this.ranger = ranger;
 
         initComponents();
         setBackground(panelBackground);
@@ -96,11 +99,11 @@ public class RangerPanel extends JPanel {
                     "[]"));
 
         //---- lblName ----
-        lblName.setText("Alys Dorne");
+        lblName.setText(ranger.name);
         add(lblName, "cell 0 0");
 
         //---- lblRank ----
-        lblRank.setText("Technical Sergeant");
+        lblRank.setText("");
         add(lblRank, "cell 0 1");
 
         //---- lblIcon ----
