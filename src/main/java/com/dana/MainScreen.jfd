@@ -6,13 +6,13 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
 			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
-			"$rowConstraints": "[][][]"
+			"$rowConstraints": "[][top][]"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 2
 			"title": "W2Saves"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
-				"$layoutConstraints": "hidemode 3,alignx center"
+				"$layoutConstraints": "insets 10px,hidemode 3"
 				"$columnConstraints": "[fill][fill]"
 				"$rowConstraints": "[][][][][][][][][][][][][][][][][][][][][][][][][][][]"
 			} ) {
@@ -22,7 +22,7 @@ new FormModel {
 					name: "lblName"
 					"text": "Alys Dorne"
 					"foreground": new java.awt.Color( 243, 144, 47, 255 )
-					"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 10, false )
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 0"
 				} )
@@ -128,8 +128,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "lblCoordination"
 					"text": "Coordination"
+					"border": new javax.swing.border.TitledBorder( new javax.swing.border.LineBorder( sfield java.awt.Color orange, 3, true ), "Title", 4, 2, new java.awt.Font( "Noto Sans", 1, 16 ), sfield java.awt.Color orange )
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-					"value": "cell 0 13"
+					"value": "cell 0 13,growx"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "lblCoordinationValue"
@@ -171,7 +172,7 @@ new FormModel {
 					name: "lblStrengthValue"
 					"text": "2"
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-					"value": "cell 0 16,alignx trailing,growx 0"
+					"value": ""
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "lblSpeed"

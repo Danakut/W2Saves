@@ -4,6 +4,7 @@
 
 package com.dana;
 
+import javax.swing.border.*;
 import com.dana.entities.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -138,7 +139,7 @@ public class MainScreen extends JFrame {
             "[fill]",
             // rows
             "[]" +
-            "[]" +
+            "[top]" +
             "[]"));
 
         //======== mnbMenus ========
@@ -161,7 +162,7 @@ public class MainScreen extends JFrame {
         {
             pnlRanger.setBackground(Color.black);
             pnlRanger.setLayout(new MigLayout(
-                "hidemode 3,alignx center",
+                "insets 10px,hidemode 3",
                 // columns
                 "[fill]" +
                 "[fill]",
@@ -197,7 +198,7 @@ public class MainScreen extends JFrame {
             //---- lblName ----
             lblName.setText("Alys Dorne");
             lblName.setForeground(new Color(243, 144, 47));
-            lblName.setFont(lblName.getFont().deriveFont(lblName.getFont().getStyle() | Font.BOLD, lblName.getFont().getSize() + 10f));
+            lblName.setFont(lblName.getFont().deriveFont(lblName.getFont().getStyle() & ~Font.BOLD, lblName.getFont().getSize() + 10f));
             pnlRanger.add(lblName, "cell 0 0");
 
             //---- lblRank ----
@@ -269,7 +270,9 @@ public class MainScreen extends JFrame {
 
             //---- lblCoordination ----
             lblCoordination.setText("Coordination");
-            pnlRanger.add(lblCoordination, "cell 0 13");
+            lblCoordination.setBorder(new TitledBorder(new LineBorder(Color.orange, 3, true), "Title", TitledBorder.LEADING, TitledBorder.TOP,
+                new Font("Noto Sans", Font.BOLD, 16), Color.orange));
+            pnlRanger.add(lblCoordination, "cell 0 13,growx");
 
             //---- lblCoordinationValue ----
             lblCoordinationValue.setText("2");
@@ -297,7 +300,7 @@ public class MainScreen extends JFrame {
 
             //---- lblStrengthValue ----
             lblStrengthValue.setText("2");
-            pnlRanger.add(lblStrengthValue, "cell 0 16,alignx trailing,growx 0");
+            pnlRanger.add(lblStrengthValue, "");
 
             //---- lblSpeed ----
             lblSpeed.setText("Speed");
@@ -428,8 +431,9 @@ public class MainScreen extends JFrame {
 
 
         //TODO toto jsou pokusy - pozdeji vymazat
-        contentPane.add(addRangerPanel(0), "cell 2 1");
-        contentPane.add(addRangerPanel(1), "cell 3 1");
+//        contentPane.add(addRangerPanel(0), "cell 2 1");
+//        contentPane.add(addRangerPanel(1), "cell 3 1");
+        contentPane.add(new RangerPanel(), "cell 2 1");
 
 
         pack();
