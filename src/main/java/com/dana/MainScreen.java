@@ -26,10 +26,6 @@ public class MainScreen extends JFrame {
         myInit();
     }
 
-    private void btnOpenFileActionClicked() {
-        // TODO add your code here
-    }
-
     Container contentPane;
     SaveHandler handler;
 
@@ -117,6 +113,8 @@ public class MainScreen extends JFrame {
         lblCompScienceValue = new JLabel();
 
         //======== this ========
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("W2Saves");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
@@ -199,15 +197,18 @@ public class MainScreen extends JFrame {
             //---- lblName ----
             lblName.setText("Alys Dorne");
             lblName.setForeground(new Color(243, 144, 47));
-            lblName.setFont(new Font("DejaVu Sans", lblName.getFont().getStyle() | Font.BOLD, lblName.getFont().getSize() + 10));
+            lblName.setFont(lblName.getFont().deriveFont(lblName.getFont().getStyle() | Font.BOLD, lblName.getFont().getSize() + 10f));
             pnlRanger.add(lblName, "cell 0 0");
 
             //---- lblRank ----
             lblRank.setText("Technical Sergeant");
+            lblRank.setFont(lblRank.getFont().deriveFont(lblRank.getFont().getStyle() | Font.BOLD));
+            lblRank.setForeground(Color.orange);
             pnlRanger.add(lblRank, "cell 0 1");
 
             //---- lblIcon ----
             lblIcon.setText("pic here");
+            lblIcon.setForeground(Color.orange);
             pnlRanger.add(lblIcon, "cell 0 2");
 
             //---- lblAP ----
@@ -419,7 +420,6 @@ public class MainScreen extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void myInit() {
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         contentPane = getContentPane();
         contentPane.setPreferredSize(new Dimension(1000, 800));
@@ -472,7 +472,11 @@ public class MainScreen extends JFrame {
         listCharismaValue = new ArrayList<>();
     }
 
+    //create a panel that will display Ranger information - return value must be appended to contentPane to be visible
     private JPanel addRangerPanel(int rangerIndex) {
+
+        final Color panelTextColor = new Color(243, 144, 47);
+        final Color panelBackground = Color.black;
 
         listRanger.add(new JPanel());
         listName.add(new JLabel());
@@ -539,8 +543,9 @@ public class MainScreen extends JFrame {
         JLabel lblIntelligenceValue = listIntelligenceValue.get(rangerIndex);
         JLabel lblCharisma = listCharisma.get(rangerIndex);
         JLabel lblCharismaValue = listCharismaValue.get(rangerIndex);
-        
-        panel.setBackground(Color.black);
+
+
+        panel.setBackground(panelBackground);
         panel.setLayout(new MigLayout(
                 "hidemode 3,alignx center",
                 // columns
@@ -578,11 +583,12 @@ public class MainScreen extends JFrame {
         //---- lblName ----
         lblName.setText("Alys Dorne");
         lblName.setForeground(new Color(243, 144, 47));
-        lblName.setFont(new Font("DejaVu Sans", lblName.getFont().getStyle() | Font.BOLD, lblName.getFont().getSize() + 10));
+        lblName.setFont(lblName.getFont().deriveFont(lblName.getFont().getStyle() | Font.BOLD, lblName.getFont().getSize() + 10f));
         panel.add(lblName, "cell 0 0");
 
         //---- lblRank ----
         lblRank.setText("Technical Sergeant");
+        lblRank.setFont(lblRank.getFont().deriveFont(lblRank.getFont().getStyle() | Font.BOLD)); //TODO this is where I'm currently add - BOLD does not apply at runtime (but shows in .jfd preview) - why??
         panel.add(lblRank, "cell 0 1");
 
         //---- lblIcon ----
@@ -740,6 +746,10 @@ public class MainScreen extends JFrame {
         //---- lblCompScienceValue ----
         lblCompScienceValue.setText("4");
         panel.add(lblCompScienceValue, "cell 0 26,alignx trailing,growx 0");
+
+        for (Component panelItem : panel.getComponents()) {
+            panelItem.setForeground(panelTextColor);
+        }
 
         return panel;
     }

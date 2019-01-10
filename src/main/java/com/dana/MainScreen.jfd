@@ -9,6 +9,8 @@ new FormModel {
 			"$rowConstraints": "[][][]"
 		} ) {
 			name: "this"
+			"defaultCloseOperation": 2
+			"title": "W2Saves"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 				"$layoutConstraints": "hidemode 3,alignx center"
 				"$columnConstraints": "[fill][fill]"
@@ -20,19 +22,22 @@ new FormModel {
 					name: "lblName"
 					"text": "Alys Dorne"
 					"foreground": new java.awt.Color( 243, 144, 47, 255 )
-					"font": new com.jformdesigner.model.SwingDerivedFont( "DejaVu Sans", 1, 10, false )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 0"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "lblRank"
 					"text": "Technical Sergeant"
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+					"foreground": sfield java.awt.Color orange
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 1"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "lblIcon"
 					"text": "pic here"
+					"foreground": sfield java.awt.Color orange
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 0 2"
 				} )
