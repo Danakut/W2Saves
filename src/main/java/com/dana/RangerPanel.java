@@ -13,8 +13,10 @@ public class RangerPanel extends JPanel {
 
     Ranger ranger;
 
-    final Color panelTextColor = new Color(243, 144, 47);
-    final Color panelBackground = Color.black;
+
+    static final String[] ATTRIBUTE_ARRAY = {"coordination", "luck", "awareness", "strength", "speed", "intelligence", "charisma"};
+    Color panelTextColor = new Color(243, 144, 47);
+    Color panelBackground = Color.black;
 
     private JPanel pnlAttributes;
 
@@ -29,26 +31,8 @@ public class RangerPanel extends JPanel {
     private JLabel lblCombatInitValue;
     private JLabel lblCombatSpeed;
     private JLabel lblCombatSpeedValue;
-    private JLabel lblCritChance;
-    private JLabel lblCritChanceValue;
-    private JLabel lblArmor;
-    private JLabel lblArmorValue;
     private JLabel lblEvasion;
     private JLabel lblEvasionValue;
-    private JLabel lblCoordination;
-    private JLabel lblCoordinationValue;
-    private JLabel lblLuck;
-    private JLabel lblLuckValue;
-    private JLabel lblAwareness;
-    private JLabel lblAwarenessValue;
-    private JLabel lblStrength;
-    private JLabel lblStrengthValue;
-    private JLabel lblSpeed;
-    private JLabel lblSpeedValue;
-    private JLabel lblIntelligence;
-    private JLabel lblIntelligenceValue;
-    private JLabel lblCharisma;
-    private JLabel lblCharismaValue;
     private JLabel lblSmartAss;
     private JLabel lblSmartAssValue;
     private JLabel lblHandguns;
@@ -142,14 +126,6 @@ public class RangerPanel extends JPanel {
         lblCombatSpeedValue.setText(ranger.getCombatSpeed());
         add(lblCombatSpeedValue, "cell 0 7");
 
-        //---- lblArmor ----
-        lblArmor.setText("Armor");
-        add(lblArmor, "cell 0 9");
-
-        //---- lblArmorValue ----
-        lblArmorValue.setText("2");
-        add(lblArmorValue, "cell 0 9");
-
         //---- lblEvasion ----
         lblEvasion.setText("Evasion");
         add(lblEvasion, "cell 0 10");
@@ -177,62 +153,20 @@ public class RangerPanel extends JPanel {
                         "[]" +
                         "[]"));
 
-        {
-            //---- lblCoordination ----
-            lblCoordination.setText("Coordination");
-            pnlAttributes.add(lblCoordination, "cell 0 0");
+        for (int i = 0; i < ATTRIBUTE_ARRAY.length; i++) {
 
-            //---- lblCoordinationValue ----
-            lblCoordinationValue.setText(ranger.getAttributeValue("coordination"));
-            pnlAttributes.add(lblCoordinationValue, "cell 1 0,alignx trailing");
+            //attribute name
+            JLabel attrLabel = new JLabel();
+            String attribute = ATTRIBUTE_ARRAY[i];
+            attrLabel.setText(attribute);
+            pnlAttributes.add(attrLabel, "cell 0 " + i) ;
 
-            //---- lblLuck ----
-            lblLuck.setText("Luck");
-            pnlAttributes.add(lblLuck, "cell 0 1");
+            //attribute value - can be queried for name of its corresponding attribute
+            JLabel valueLabel = new JLabel();
+            valueLabel.setName(attribute);
+            valueLabel.setText(ranger.getAttributeValue(attribute));
+            pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
 
-            //---- lblLuckValue ----
-            lblLuckValue.setText(ranger.getAttributeValue("luck"));
-            pnlAttributes.add(lblLuckValue, "cell 1 1,alignx trailing");
-
-            //---- lblAwareness ----
-            lblAwareness.setText("Awareness");
-            pnlAttributes.add(lblAwareness, "cell 0 2, growx");
-
-            //---- lblAwarenessValue ----
-            lblAwarenessValue.setText(ranger.getAttributeValue("awareness"));
-            pnlAttributes.add(lblAwarenessValue, "cell 1 2,alignx trailing");
-
-            //---- lblStrength ----
-            lblStrength.setText("Strength");
-            pnlAttributes.add(lblStrength, "cell 0 3");
-
-            //---- lblStrengthValue ----
-            lblStrengthValue.setText(ranger.getAttributeValue("strength"));
-            pnlAttributes.add(lblStrengthValue, "cell 1 3,alignx trailing");
-
-            //---- lblSpeed ----
-            lblSpeed.setText("Speed");
-            pnlAttributes.add(lblSpeed, "cell 0 4");
-
-            //---- lblSpeedValue ----
-            lblSpeedValue.setText(ranger.getAttributeValue("speed"));
-            pnlAttributes.add(lblSpeedValue, "cell 1 4,alignx trailing");
-
-            //---- lblIntelligence ----
-            lblIntelligence.setText("Intelligence");
-            pnlAttributes.add(lblIntelligence, "cell 0 5");
-
-            //---- lblIntelligenceValue ----
-            lblIntelligenceValue.setText(ranger.getAttributeValue("intelligence"));
-            pnlAttributes.add(lblIntelligenceValue, "cell 1 5,alignx trailing");
-
-            //---- lblCharisma ----
-            lblCharisma.setText("Charisma");
-            pnlAttributes.add(lblCharisma, "cell 0 6");
-
-            //---- lblCharismaValue ----
-            lblCharismaValue.setText(ranger.getAttributeValue("charisma"));
-            pnlAttributes.add(lblCharismaValue, "cell 1 6,alignx trailing");
         }
 
         pnlAttributes.setBackground(panelBackground);
@@ -303,7 +237,6 @@ public class RangerPanel extends JPanel {
 
     }
 
-
     private void initComponents() {
         pnlAttributes = new JPanel();
 
@@ -318,26 +251,8 @@ public class RangerPanel extends JPanel {
         lblCombatInitValue = new JLabel();
         lblCombatSpeed = new JLabel();
         lblCombatSpeedValue = new JLabel();
-        lblCritChance = new JLabel();
-        lblCritChanceValue = new JLabel();
-        lblArmor = new JLabel();
-        lblArmorValue = new JLabel();
         lblEvasion = new JLabel();
         lblEvasionValue = new JLabel();
-        lblCoordination = new JLabel();
-        lblCoordinationValue = new JLabel();
-        lblLuck = new JLabel();
-        lblLuckValue = new JLabel();
-        lblAwareness = new JLabel();
-        lblAwarenessValue = new JLabel();
-        lblStrength = new JLabel();
-        lblStrengthValue = new JLabel();
-        lblSpeed = new JLabel();
-        lblSpeedValue = new JLabel();
-        lblIntelligence = new JLabel();
-        lblIntelligenceValue = new JLabel();
-        lblCharisma = new JLabel();
-        lblCharismaValue = new JLabel();
         lblSmartAss = new JLabel();
         lblSmartAssValue = new JLabel();
         lblHandguns = new JLabel();
