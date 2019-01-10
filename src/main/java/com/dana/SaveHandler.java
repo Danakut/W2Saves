@@ -425,6 +425,7 @@ public class SaveHandler {
         workingString = findParticularProperty("damageDone", personInString);
         newPerson.damageDone = Integer.parseInt(workingString);
 
+
         //available attribute points
         workingString = findParticularProperty("availableAttributePoints", personInString);
         newPerson.availAttrPoints = Integer.parseInt(workingString);
@@ -436,6 +437,14 @@ public class SaveHandler {
         //available perk points
         workingString = findParticularProperty("availableTraitPoints", personInString);
         newPerson.availTraitPoints = Integer.parseInt(workingString);
+
+        //Ranger or Follower?
+        workingString = findParticularProperty("isCNPC", personInString);
+        newPerson.isCNPC = Boolean.parseBoolean(workingString);
+
+        //lucky hitpoints
+        workingString = findParticularProperty("luckyHitpoints", personInString);
+        newPerson.luckyHp = Integer.parseInt(workingString);
 
         //attributes
         Map<String, Integer> newAttributes = new HashMap<>();

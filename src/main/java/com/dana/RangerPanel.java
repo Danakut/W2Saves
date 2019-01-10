@@ -103,7 +103,7 @@ public class RangerPanel extends JPanel {
         add(lblName, "cell 0 0");
 
         //---- lblRank ----
-        lblRank.setText("");
+        lblRank.setText(ranger.getRank());
         add(lblRank, "cell 0 1");
 
         //---- lblIcon ----
@@ -111,19 +111,19 @@ public class RangerPanel extends JPanel {
         add(lblIcon, "cell 0 2");
 
         //---- lblAP ----
-        lblAP.setText("AP 8");
+        lblAP.setText("AP " + ranger.getAP());
         add(lblAP, "cell 0 3");
 
         //---- lblLevel ----
-        lblLevel.setText("Level 14");
+        lblLevel.setText("Level " + ranger.level);
         add(lblLevel, "cell 0 3");
 
         //---- lblCon ----
-        lblCon.setText("CON 126 / 137");
+        lblCon.setText("CON " + ranger.currentHp + " / " + ranger.getCon());
         add(lblCon, "cell 0 4");
 
         //---- lblExp ----
-        lblExp.setText("Exp 13 964 / 14 100");
+        lblExp.setText("Exp " + ranger.exp + " / " + ranger.getexpToNextLevel());
         add(lblExp, "cell 0 5");
 
         //---- lblCombatInit ----
@@ -131,7 +131,7 @@ public class RangerPanel extends JPanel {
         add(lblCombatInit, "cell 0 6");
 
         //---- lblCombatInitValue ----
-        lblCombatInitValue.setText("10");
+        lblCombatInitValue.setText(ranger.getInitiative());
         add(lblCombatInitValue, "cell 0 6");
 
         //---- lblCombatSpeed ----
@@ -139,16 +139,8 @@ public class RangerPanel extends JPanel {
         add(lblCombatSpeed, "cell 0 7");
 
         //---- lblCombatSpeedValue ----
-        lblCombatSpeedValue.setText("2.1");
+        lblCombatSpeedValue.setText(ranger.getCombatSpeed());
         add(lblCombatSpeedValue, "cell 0 7");
-
-        //---- lblCritChance ----
-        lblCritChance.setText("Critical Chance");
-        add(lblCritChance, "cell 0 8");
-
-        //---- lblCritChanceValue ----
-        lblCritChanceValue.setText("38 %");
-        add(lblCritChanceValue, "cell 0 8");
 
         //---- lblArmor ----
         lblArmor.setText("Armor");
@@ -163,7 +155,7 @@ public class RangerPanel extends JPanel {
         add(lblEvasion, "cell 0 10");
 
         //---- lblEvasionValue ----
-        lblEvasionValue.setText("6 %");
+        lblEvasionValue.setText(ranger.getEvasion());
         add(lblEvasionValue, "cell 0 10");
 
 
@@ -191,7 +183,7 @@ public class RangerPanel extends JPanel {
             pnlAttributes.add(lblCoordination, "cell 0 0");
 
             //---- lblCoordinationValue ----
-            lblCoordinationValue.setText("2");
+            lblCoordinationValue.setText(ranger.getAttributeValue("coordination"));
             pnlAttributes.add(lblCoordinationValue, "cell 1 0,alignx trailing");
 
             //---- lblLuck ----
@@ -199,7 +191,7 @@ public class RangerPanel extends JPanel {
             pnlAttributes.add(lblLuck, "cell 0 1");
 
             //---- lblLuckValue ----
-            lblLuckValue.setText("2");
+            lblLuckValue.setText(ranger.getAttributeValue("luck"));
             pnlAttributes.add(lblLuckValue, "cell 1 1,alignx trailing");
 
             //---- lblAwareness ----
@@ -207,7 +199,7 @@ public class RangerPanel extends JPanel {
             pnlAttributes.add(lblAwareness, "cell 0 2, growx");
 
             //---- lblAwarenessValue ----
-            lblAwarenessValue.setText("3");
+            lblAwarenessValue.setText(ranger.getAttributeValue("awareness"));
             pnlAttributes.add(lblAwarenessValue, "cell 1 2,alignx trailing");
 
             //---- lblStrength ----
@@ -215,7 +207,7 @@ public class RangerPanel extends JPanel {
             pnlAttributes.add(lblStrength, "cell 0 3");
 
             //---- lblStrengthValue ----
-            lblStrengthValue.setText("2");
+            lblStrengthValue.setText(ranger.getAttributeValue("strength"));
             pnlAttributes.add(lblStrengthValue, "cell 1 3,alignx trailing");
 
             //---- lblSpeed ----
@@ -223,7 +215,7 @@ public class RangerPanel extends JPanel {
             pnlAttributes.add(lblSpeed, "cell 0 4");
 
             //---- lblSpeedValue ----
-            lblSpeedValue.setText("4");
+            lblSpeedValue.setText(ranger.getAttributeValue("speed"));
             pnlAttributes.add(lblSpeedValue, "cell 1 4,alignx trailing");
 
             //---- lblIntelligence ----
@@ -231,7 +223,7 @@ public class RangerPanel extends JPanel {
             pnlAttributes.add(lblIntelligence, "cell 0 5");
 
             //---- lblIntelligenceValue ----
-            lblIntelligenceValue.setText("10");
+            lblIntelligenceValue.setText(ranger.getAttributeValue("intelligence"));
             pnlAttributes.add(lblIntelligenceValue, "cell 1 5,alignx trailing");
 
             //---- lblCharisma ----
@@ -239,7 +231,7 @@ public class RangerPanel extends JPanel {
             pnlAttributes.add(lblCharisma, "cell 0 6");
 
             //---- lblCharismaValue ----
-            lblCharismaValue.setText("6");
+            lblCharismaValue.setText(ranger.getAttributeValue("charisma"));
             pnlAttributes.add(lblCharismaValue, "cell 1 6,alignx trailing");
         }
 

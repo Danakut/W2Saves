@@ -425,9 +425,10 @@ public class MainScreen extends JFrame {
     private void myInit() {
 
         myContentPane = getContentPane();
-        myContentPane.setPreferredSize(new Dimension(1000, 800));
+        myContentPane.setPreferredSize(new Dimension(1400, 800));
         initPanelVariables();
         this.pack();
+        this.setLocationRelativeTo(null);
 
         handler = new SaveHandler();
 
