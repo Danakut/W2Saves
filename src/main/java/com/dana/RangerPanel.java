@@ -128,11 +128,11 @@ public class RangerPanel extends JPanel {
 
         //---- lblEvasion ----
         lblEvasion.setText("Evasion");
-        add(lblEvasion, "cell 0 10");
+        add(lblEvasion, "cell 0 8");
 
         //---- lblEvasionValue ----
         lblEvasionValue.setText(ranger.getEvasion());
-        add(lblEvasionValue, "cell 0 10");
+        add(lblEvasionValue, "cell 0 8");
 
 
 
