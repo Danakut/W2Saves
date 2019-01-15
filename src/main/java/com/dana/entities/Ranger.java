@@ -33,7 +33,7 @@ public class Ranger {
     public Item[] equipment;
     public Item[] inventory;
     public Map<String, Integer> attributes;
-    public Map<String, Integer> skills;
+    public Map<String, Skill> skills;
     public List<Trait> quirks;
     public List<Trait> traits;
     public boolean isCNPC;
@@ -131,6 +131,7 @@ public class Ranger {
 
     public Ranger() {
 
+        skills = new HashMap<>(Skill.SKILL_MAP);
     }
 
     /*----------------------derived stats-----------------*/
@@ -189,8 +190,18 @@ public class Ranger {
         return Integer.toString(value);
     }
 
-    public String getexpToNextLevel() {
+    public String getExpToNextLevel() {
         Pair<Integer, String> levelInfo = LEVELMAP.get(this.level);
         return levelInfo.getKey().toString();
+    }
+
+    public Skill getSkill(String skill) {
+        return skills.get(skill);
+    }
+
+    public void setSkillValue(String skill, int value) {
+        Skill replacementSkill = skills.get(skill);
+        replacementSkill.setValue(value);
+        skills.replace(skill, replacementSkill);
     }
 }

@@ -5,6 +5,7 @@ import com.dana.Exceptions.PropertyNotAssembledException;
 import com.dana.Exceptions.ValueNotFoundException;
 import com.dana.entities.Gender;
 import com.dana.entities.Ranger;
+import com.dana.entities.Skill;
 import com.dana.entities.Trait;
 import javafx.util.Pair;
 
@@ -26,14 +27,6 @@ public class SaveHandler {
     public static final Logger logger = Logger.getLogger(App.class.getName());
 
     private static String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
-    private static String[] SKILL_ARRAY = {"weaponSmith", "toasterRepair", "spotLie", "sniperRifle", "smg", "shotgun",
-            "safecrack", "rifle", "pickLock", "perception", "outdoorsman", "mechanicalRepair", "manipulate", "leadership",
-            "intimidate", "handgun", "fieldMedic", "energyWeapons", "doctor", "demolitions", "computerTech", "combatShooting",
-            "calvinBackerSkill", "bruteForce", "brawling", "bluntWeapons", "bladedWeapons", "barter", "animalWhisperer", "alarmDisarm",
-            "atWeapons"};
-
-
-
 
     String content;
     List<String> personsInString;
@@ -231,20 +224,21 @@ public class SaveHandler {
         newPerson.attributes = newAttributes;
 
         //skills
-        Map<String, Integer> newSkills = new HashMap<>();
+        Map<String, Skill> newSkills = new HashMap<>();
         properties = findParticularProperty("skillXps", personInString);
+        Pair<String, Integer> skillPair = null;
 
-        for (int i = 0; i < SKILL_ARRAY.length; i++) {
-            Pair<String, Integer> workingPair = null;
+        //finds entries in .xml for every known skill. If a value is > 0, it is updated in the person's skills.
+        for (String skillXmlName : Skill.SKILL_MAP.keySet()) {
             try {
-                workingPair = findKeyValuePair(SKILL_ARRAY[i], properties);
+                skillPair  = findKeyValuePair(skillXmlName, properties);
             } catch (Exception ex) {
                 throw new PropertyNotAssembledException("Processing person \"" + newPerson.name + "\" failed at Skills", ex);
             }
-            newSkills.put(workingPair.getKey(), workingPair.getValue());
+            if (skillPair.getValue() > 0) {
+                newPerson.setSkillValue(skillPair.getKey(), skillPair.getValue());
+            }
         }
-
-        newPerson.skills = newSkills;
 
         //traits
         properties = findParticularProperty("traits", personInString);

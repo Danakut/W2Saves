@@ -107,7 +107,7 @@ public class RangerPanel extends JPanel {
         add(lblCon, "cell 0 4");
 
         //---- lblExp ----
-        lblExp.setText("Exp " + ranger.exp + " / " + ranger.getexpToNextLevel());
+        lblExp.setText("Exp " + ranger.exp + " / " + ranger.getExpToNextLevel());
         add(lblExp, "cell 0 5");
 
         //---- lblCombatInit ----

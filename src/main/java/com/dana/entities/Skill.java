@@ -1,12 +1,13 @@
 package com.dana.entities;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Skill {
 
     public static Map<String, Skill> SKILL_MAP = initSkillMap();
-    public static int TRAITS_COUNT = SKILL_MAP.size();
+    public static int SKILLS_COUNT = SKILL_MAP.size();
 
     private String displayName;
     private String xmlName;
@@ -197,7 +198,25 @@ public class Skill {
         skill.group = "general";
         newMap.put(skill.xmlName, skill);
 
+        /*---------------------Special skills-------------*/
+
+        skill = new Skill();
+        skill.displayName = "Combat Shooting";
+        skill.xmlName = "combatShooting";
+        skill.group = "special";
+        newMap.put(skill.xmlName, skill);
+
+        //Kickstarter backer skill
+        skill = new Skill();
+        skill.displayName = "Southwestern Folklore";
+        skill.xmlName = "calvinBackerSkill";
+        skill.group = "special";
+        newMap.put(skill.xmlName, skill);
+
         return newMap;
     }
-    
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }
