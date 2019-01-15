@@ -16,11 +16,6 @@ public class Trait {
     private String drawback;
     private int index;
 
-
-    public Trait() {
-        
-    }
-
     //todo add Predicate as a field indicating whether there are prerequisites for the trait
 
     public String getDisplayName() {
