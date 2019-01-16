@@ -1,5 +1,6 @@
 package com.dana;
 
+import com.dana.Exceptions.InvalidSkillValueException;
 import com.dana.entities.Ranger;
 import com.dana.entities.Skill;
 import net.miginfocom.swing.MigLayout;
@@ -332,7 +333,12 @@ public class RangerPanel extends JPanel {
 
                 JLabel valueLabel = new JLabel();
                 valueLabel.setName(skill.getXmlName());
-                valueLabel.setText(Integer.toString(skill.getValue()));
+                try {
+                    valueLabel.setText(calculateSkillLevelfromValue(skill.getValue()));
+                } catch (InvalidSkillValueException ex) {
+                    skillLabel.setText("Value of " + skill.getDisplayName() + " not parsed.");
+                }
+
                 pnlSkills.add(valueLabel, "cell 1 " + i + ", alignx trailing");
 
                 i++;
@@ -344,6 +350,23 @@ public class RangerPanel extends JPanel {
         setPanelBorder(pnlSkills, "Skills", panelTextColor);
 
         return pnlSkills;
+    }
+
+    private String calculateSkillLevelfromValue(int value) throws InvalidSkillValueException {
+
+        switch (value) {
+            case 2: return Integer.toString(1);
+            case 4: return Integer.toString(2);
+            case 6: return Integer.toString(3);
+            case 10: return Integer.toString(4);
+            case 14: return Integer.toString(5);
+            case 18: return Integer.toString(6);
+            case 24: return Integer.toString(7);
+            case 30: return Integer.toString(8);
+            case 36: return Integer.toString(9);
+            case 44: return Integer.toString(10);
+            default: throw new InvalidSkillValueException("Skill value " + value + " is not valid.");
+        }
 
     }
 
