@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Skill {
+public class Skill implements Comparable<Skill> {
 
     public static final Map<String, Skill> SKILL_MAP = initSkillMap();
     public static final int SKILLS_COUNT = SKILL_MAP.size();
@@ -244,5 +244,24 @@ public class Skill {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    @Override
+    public int compareTo(Skill o) {
+
+        if (this.group.equals(o.group)) {
+            if (this.xmlName.equals(o.xmlName)) {
+                return 0;
+            } else {
+                return this.displayName.compareTo(o.displayName);
+            }
+
+        } else if (this.group.equals("combat")) {
+            return -1;
+        } else if ((this.group.equals("knowledge")) && o.group.equals("general")) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }

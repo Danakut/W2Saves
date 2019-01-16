@@ -10,6 +10,8 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RangerPanel extends JPanel {
 
@@ -324,9 +326,12 @@ public class RangerPanel extends JPanel {
                         "[]" +
                         "[]"));
         int i = 0;
+
         for (String skillXmlName : Skill.SKILL_MAP.keySet()) {
             Skill skill = rangerData.getSkill(skillXmlName);
             if (skill.getValue() > 0) {
+
+
                 JLabel skillLabel = new JLabel();
                 skillLabel.setText(skill.getDisplayName());
                 pnlSkills.add(skillLabel, "cell 0 " + i);
@@ -367,7 +372,6 @@ public class RangerPanel extends JPanel {
             case 44: return Integer.toString(10);
             default: throw new InvalidSkillValueException("Skill value " + value + " is not valid.");
         }
-
     }
 
 }
