@@ -138,89 +138,8 @@ public class RangerPanel extends JPanel {
         lblEvasionValue.setText(rangerData.getEvasion());
         add(lblEvasionValue, "cell 0 8");
 
-
-
-
-//        //pnlAttributes
-//        pnlAttributes.setLayout(new MigLayout(
-//                "hidemode 3",
-//                // columns
-//                "[fill]" +
-//                        "[]",
-//                // rows
-//                "[]" +
-//                        "[]" +
-//                        "[]" +
-//                        "[]" +
-//                        "[]" +
-//                        "[]" +
-//                        "[]" +
-//                        "[]"));
-//
-//        for (int i = 0; i < ATTRIBUTES_IN_ORDER.length; i++) {
-//
-//            //attribute name
-//            JLabel attrLabel = new JLabel();
-//            String attribute = ATTRIBUTES_IN_ORDER[i];
-//            attrLabel.setText(attribute);
-//            pnlAttributes.add(attrLabel, "cell 0 " + i) ;
-//
-//            //attribute value - can be queried for name of its corresponding attribute
-//            JLabel valueLabel = new JLabel();
-//            valueLabel.setName(attribute);
-//            valueLabel.setText(rangerData.getAttributeValue(attribute.toLowerCase()));
-//            pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
-//
-//        }
-//
-//        pnlAttributes.setBackground(panelBackground);
-//        setTextColor(pnlAttributes, panelTextColor);
-//        setPanelBorder(pnlAttributes, "Attributes", panelTextColor);
-//        add(pnlAttributes, "cell 0 9");
-
         add(createAttributePanel(), "cell 0 9" );
         add(createSkillPanel(), "cell 0 10");
-
-//        //---- lblSmartAss ----
-//        lblSmartAss.setText("Smart Ass");
-//        add(lblSmartAss, "cell 0 22");
-//
-//        //---- lblSmartAssValue ----
-//        lblSmartAssValue.setText("6");
-//        panel.add(lblSmartAssValue, "cell 0 22,alignx trailing,growx 0");
-//
-//        //---- lblHandguns ----
-//        lblHandguns.setText("Handguns");
-//        panel.add(lblHandguns, "cell 0 23");
-//
-//        //---- lblHandgunsValue ----
-//        lblHandgunsValue.setText("6");
-//        panel.add(lblHandgunsValue, "cell 0 23,alignx trailing,growx 0");
-//
-//        //---- lblKissAss ----
-//        lblKissAss.setText("Kiss Ass");
-//        panel.add(lblKissAss, "cell 0 24");
-//
-//        //---- lblKissAssValue ----
-//        lblKissAssValue.setText("4");
-//        panel.add(lblKissAssValue, "cell 0 24,alignx trailing,growx 0");
-//
-//        //---- lblSurgeon ----
-//        lblSurgeon.setText("Surgeon");
-//        panel.add(lblSurgeon, "cell 0 25");
-//
-//        //---- lblSurgeonlblSurgeonValue ----
-//        lblSurgeonlblSurgeonValue.setText("4");
-//        panel.add(lblSurgeonlblSurgeonValue, "cell 0 25,alignx trailing,growx 0");
-//
-//        //---- lblCompScience ----
-//        lblCompScience.setText("Computer Science");
-//        panel.add(lblCompScience, "cell 0 26");
-//
-//        //---- lblCompScienceValue ----
-//        lblCompScienceValue.setText("4");
-//        panel.add(lblCompScienceValue, "cell 0 26,alignx trailing,growx 0");
-
 
         setTextColor(this, panelTextColor);
     }

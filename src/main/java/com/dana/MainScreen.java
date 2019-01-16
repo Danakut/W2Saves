@@ -30,40 +30,6 @@ public class MainScreen extends JFrame {
     Container myContentPane;
     SaveHandler handler;
 
-    private List<JPanel> listRanger;
-    private List<JLabel> listName;
-    private List<JLabel> listRank;
-    private List<JLabel> listIcon;
-    private List<JLabel> listAP;
-    private List<JLabel> listLevel;
-    private List<JLabel> listCon;
-    private List<JLabel> listExp;
-    private List<JLabel> listCombatInit;
-    private List<JLabel> listCombatInitValue;
-    private List<JLabel> listCombatSpeed;
-    private List<JLabel> listCombatSpeedValue;
-    private List<JLabel> listCritChance;
-    private List<JLabel> listCritChanceValue;
-    private List<JLabel> listArmor;
-    private List<JLabel> listArmorValue;
-    private List<JLabel> listEvasion;
-    private List<JLabel> listEvasionValue;
-    private List<JLabel> listCoordination;
-    private List<JLabel> listCoordinationValue;
-    private List<JLabel> listLuck;
-    private List<JLabel> listLuckValue;
-    private List<JLabel> listAwareness;
-    private List<JLabel> listAwarenessValue;
-    private List<JLabel> listStrength;
-    private List<JLabel> listStrengthValue;
-    private List<JLabel> listSpeed;
-    private List<JLabel> listSpeedValue;
-    private List<JLabel> listIntelligence;
-    private List<JLabel> listIntelligenceValue;
-    private List<JLabel> listCharisma;
-    private List<JLabel> listCharismaValue;
-
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner non-commercial license
@@ -137,7 +103,6 @@ public class MainScreen extends JFrame {
 
         handler = new SaveHandler();
 
-        //TODO toto jsou pokusy - pozdeji vymazat
     }
 
 

@@ -1,12 +1,7 @@
 package com.dana;
 
-import com.dana.Exceptions.KeyNotFoundException;
-import com.dana.Exceptions.PropertyNotAssembledException;
-import com.dana.Exceptions.ValueNotFoundException;
-import com.dana.entities.Gender;
-import com.dana.entities.Ranger;
-import com.dana.entities.Skill;
-import com.dana.entities.Trait;
+import com.dana.Exceptions.*;
+import com.dana.entities.*;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -45,17 +40,10 @@ public class SaveHandler {
         appLogger.setUseParentHandlers(false);
     }
 
-    String testThis() {
-        Ranger thisRanger = persons.get(0);
-        String toTest =  thisRanger.gender.toString();
-        return toTest;
-    }
-
     void init() throws Exception {
 
         personsInString = findPersonStrings();
         persons = collectPersons();
-        int test = 1;
     }
 
     void openFile(Path file) throws IOException {
