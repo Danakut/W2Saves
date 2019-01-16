@@ -12,8 +12,7 @@ import java.awt.*;
 
 public class RangerPanel extends JPanel {
 
-    Ranger ranger;
-
+    Ranger rangerData;
 
     static final String[] ATTRIBUTES_IN_ORDER = {"Coordination", "Luck", "Awareness", "Strength", "Speed", "Intelligence", "Charisma"};
     Color panelTextColor = new Color(243, 144, 47);
@@ -46,7 +45,7 @@ public class RangerPanel extends JPanel {
     private JLabel lblCompScienceValue;
 
     public RangerPanel(Ranger ranger) {
-        this.ranger = ranger;
+        this.rangerData = ranger;
 
         initComponents();
         setBackground(panelBackground);
@@ -84,11 +83,11 @@ public class RangerPanel extends JPanel {
                     "[]"));
 
         //---- lblName ----
-        lblName.setText(ranger.name);
+        lblName.setText(rangerData.name);
         add(lblName, "cell 0 0");
 
         //---- lblRank ----
-        lblRank.setText(ranger.getRank());
+        lblRank.setText(rangerData.getRank());
         add(lblRank, "cell 0 1");
 
         //---- lblIcon ----
@@ -96,19 +95,19 @@ public class RangerPanel extends JPanel {
         add(lblIcon, "cell 0 2");
 
         //---- lblAP ----
-        lblAP.setText("AP " + ranger.getAP());
+        lblAP.setText("AP " + rangerData.getAP());
         add(lblAP, "cell 0 3");
 
         //---- lblLevel ----
-        lblLevel.setText("Level " + ranger.level);
+        lblLevel.setText("Level " + rangerData.level);
         add(lblLevel, "cell 0 3");
 
         //---- lblCon ----
-        lblCon.setText("CON " + ranger.currentHp + " / " + ranger.getCon());
+        lblCon.setText("CON " + rangerData.currentHp + " / " + rangerData.getCon());
         add(lblCon, "cell 0 4");
 
         //---- lblExp ----
-        lblExp.setText("Exp " + ranger.exp + " / " + ranger.getExpToNextLevel());
+        lblExp.setText("Exp " + rangerData.exp + " / " + rangerData.getExpToNextLevel());
         add(lblExp, "cell 0 5");
 
         //---- lblCombatInit ----
@@ -116,7 +115,7 @@ public class RangerPanel extends JPanel {
         add(lblCombatInit, "cell 0 6");
 
         //---- lblCombatInitValue ----
-        lblCombatInitValue.setText(ranger.getInitiative());
+        lblCombatInitValue.setText(rangerData.getInitiative());
         add(lblCombatInitValue, "cell 0 6");
 
         //---- lblCombatSpeed ----
@@ -124,7 +123,7 @@ public class RangerPanel extends JPanel {
         add(lblCombatSpeed, "cell 0 7");
 
         //---- lblCombatSpeedValue ----
-        lblCombatSpeedValue.setText(ranger.getCombatSpeed());
+        lblCombatSpeedValue.setText(rangerData.getCombatSpeed());
         add(lblCombatSpeedValue, "cell 0 7");
 
         //---- lblEvasion ----
@@ -132,7 +131,7 @@ public class RangerPanel extends JPanel {
         add(lblEvasion, "cell 0 8");
 
         //---- lblEvasionValue ----
-        lblEvasionValue.setText(ranger.getEvasion());
+        lblEvasionValue.setText(rangerData.getEvasion());
         add(lblEvasionValue, "cell 0 8");
 
 
@@ -165,7 +164,7 @@ public class RangerPanel extends JPanel {
 //            //attribute value - can be queried for name of its corresponding attribute
 //            JLabel valueLabel = new JLabel();
 //            valueLabel.setName(attribute);
-//            valueLabel.setText(ranger.getAttributeValue(attribute.toLowerCase()));
+//            valueLabel.setText(rangerData.getAttributeValue(attribute.toLowerCase()));
 //            pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
 //
 //        }
@@ -296,7 +295,7 @@ public class RangerPanel extends JPanel {
             //attribute value - can be queried for name of its corresponding attribute
             JLabel valueLabel = new JLabel();
             valueLabel.setName(attribute);
-            valueLabel.setText(ranger.getAttributeValue(attribute.toLowerCase()));
+            valueLabel.setText(rangerData.getAttributeValue(attribute.toLowerCase()));
             pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
         }
 
@@ -325,7 +324,7 @@ public class RangerPanel extends JPanel {
                         "[]"));
         int i = 0;
         for (String skillXmlName : Skill.SKILL_MAP.keySet()) {
-            Skill skill = ranger.getSkill(skillXmlName);
+            Skill skill = rangerData.getSkill(skillXmlName);
             if (skill.getValue() > 0) {
                 JLabel skillLabel = new JLabel();
                 skillLabel.setText(skill.getDisplayName());

@@ -102,7 +102,7 @@ public class Skill {
 
         skill = new Skill();
         skill.displayName = "Field Medic";
-        skill.xmlName = "";
+        skill.xmlName = "fieldMedic";
         skill.group = "knowledge";
         newMap.put(skill.xmlName, skill);
 
@@ -120,7 +120,7 @@ public class Skill {
 
         skill = new Skill();
         skill.displayName = "Safecracking";
-        skill.xmlName = "";
+        skill.xmlName = "safecrack";
         skill.group = "knowledge";
         newMap.put(skill.xmlName, skill);
 
@@ -214,6 +214,16 @@ public class Skill {
         newMap.put(skill.xmlName, skill);
 
         return newMap;
+    }
+
+    public Skill() {
+
+    }
+
+    public Skill(String displayName, String xmlName, String group) {
+        this.displayName = displayName;
+        this.xmlName = xmlName;
+        this.group = group;
     }
 
     public String getDisplayName() {

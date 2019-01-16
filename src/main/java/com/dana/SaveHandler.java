@@ -27,7 +27,7 @@ public class SaveHandler {
 
     private static final Logger appLogger = Logger.getGlobal();
     private static final Handler appHandler = new ConsoleHandler();
-    private Level reportLevel = Level.FINE;
+    private Level reportLevel = Level.FINER;
 
     private static final String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
 
@@ -55,7 +55,7 @@ public class SaveHandler {
 
         personsInString = findPersonStrings();
         persons = collectPersons();
-        currentWorkingIndex = 0;
+        int test = 1;
     }
 
     void openFile(Path file) throws IOException {
@@ -253,7 +253,6 @@ public class SaveHandler {
         appLogger.fine(newPerson.name + ": attributes processed.");
 
         //skills
-        Map<String, Skill> newSkills = new HashMap<>();
         properties = findParticularProperty("skillXps", personInString);
         Pair<String, Integer> skillPair = null;
 
@@ -265,6 +264,7 @@ public class SaveHandler {
             }
             if (skillPair.getValue() > 0) {
                 newPerson.setSkillValue(skillPair.getKey(), skillPair.getValue());
+                appLogger.finer(newPerson.name + ": skill " + skillPair.getKey() + ", value " + skillPair.getValue());
             }
         }
         appLogger.fine(newPerson.name + ": skills processed.");

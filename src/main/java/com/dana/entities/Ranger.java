@@ -130,8 +130,15 @@ public class Ranger {
 
 
     public Ranger() {
+        skills = new HashMap<>();
 
-        skills = new HashMap<>(Skill.SKILL_MAP);
+        for (String skillXmlName : Skill.SKILL_MAP.keySet()) {
+            Skill templateSkill = Skill.SKILL_MAP.get(skillXmlName);
+            Skill newSkill = new Skill(templateSkill.getDisplayName(), templateSkill.getXmlName(), templateSkill.getGroup());
+            newSkill.setValue(0);
+            skills.put(skillXmlName, newSkill);
+        }
+
     }
 
     /*----------------------derived stats-----------------*/
