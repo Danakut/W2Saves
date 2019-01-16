@@ -14,7 +14,7 @@ public class RangerPanel extends JPanel {
     Ranger ranger;
 
 
-    static final String[] ATTRIBUTE_ARRAY = {"coordination", "luck", "awareness", "strength", "speed", "intelligence", "charisma"};
+    static final String[] ATTRIBUTES_IN_ORDER = {"Coordination", "Luck", "Awareness", "Strength", "Speed", "Intelligence", "Charisma"};
     Color panelTextColor = new Color(243, 144, 47);
     Color panelBackground = Color.black;
 
@@ -153,18 +153,18 @@ public class RangerPanel extends JPanel {
                         "[]" +
                         "[]"));
 
-        for (int i = 0; i < ATTRIBUTE_ARRAY.length; i++) {
+        for (int i = 0; i < ATTRIBUTES_IN_ORDER.length; i++) {
 
             //attribute name
             JLabel attrLabel = new JLabel();
-            String attribute = ATTRIBUTE_ARRAY[i];
+            String attribute = ATTRIBUTES_IN_ORDER[i];
             attrLabel.setText(attribute);
             pnlAttributes.add(attrLabel, "cell 0 " + i) ;
 
             //attribute value - can be queried for name of its corresponding attribute
             JLabel valueLabel = new JLabel();
             valueLabel.setName(attribute);
-            valueLabel.setText(ranger.getAttributeValue(attribute));
+            valueLabel.setText(ranger.getAttributeValue(attribute.toLowerCase()));
             pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
 
         }

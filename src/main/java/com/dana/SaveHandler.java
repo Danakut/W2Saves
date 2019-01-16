@@ -228,7 +228,6 @@ public class SaveHandler {
         properties = findParticularProperty("skillXps", personInString);
         Pair<String, Integer> skillPair = null;
 
-        //finds entries in .xml for every known skill. If a value is > 0, it is updated in the person's skills.
         for (String skillXmlName : Skill.SKILL_MAP.keySet()) {
             try {
                 skillPair  = findKeyValuePair(skillXmlName, properties);
