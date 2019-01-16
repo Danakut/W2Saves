@@ -64,8 +64,6 @@ public class SaveHandler {
         content = new String(Files.readAllBytes(file), charset);
         appLogger.info("File " + file.toString() + " opened.");
 
-        appLogger.info("Info test message");
-        appLogger.fine("Fine test message");
     }
 
     private List<String> findPersonStrings() throws Exception {
@@ -133,10 +131,12 @@ public class SaveHandler {
         workingString = findParticularProperty("displayName", personInString);
         workingString = workingString.substring(3, workingString.length() - 3);
         newPerson.name = workingString;
+        appLogger.fine(newPerson.name + ": name processed.");
 
         //portrait
         workingString = findParticularProperty("portraitName", personInString);
         newPerson.portraitName = workingString;
+        appLogger.fine(newPerson.name + ": portrait processed.");
 
         //gender
         workingString = findParticularProperty("gender", personInString);
@@ -147,75 +147,93 @@ public class SaveHandler {
         } else {
             newPerson.gender = Gender.UNKNOWN;
         }
+        appLogger.fine(newPerson.name + ": gender processed.");
 
         //religion
         workingString = findParticularProperty("religion", personInString);
         newPerson.religion = workingString;
+        appLogger.fine(newPerson.name + ": religion processed.");
 
         //smokes
         workingString = findParticularProperty("smokes", personInString);
         newPerson.smokes = workingString;
+        appLogger.fine(newPerson.name + ": smokes processed.");
 
         //ethnicity
         workingString = findParticularProperty("ethnicity", personInString);
         newPerson.ethnicity = workingString;
+        appLogger.fine(newPerson.name + ": ethnicity processed.");
 
         //biography
         workingString = findParticularProperty("biography", personInString);
         newPerson.biography = workingString;
+        appLogger.fine(newPerson.name + ": biography processed.");
 
         //skin color
         workingString = findParticularProperty("skinColor", personInString);
         newPerson.skinColor = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": skin color processed.");
 
         //age
         workingString = findParticularProperty("age", personInString);
         newPerson.age = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": age processed.");
 
         //level
         workingString = findParticularProperty("level", personInString);
         newPerson.level = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": level processed.");
 
         //xp
         workingString = findParticularProperty("xp", personInString);
         newPerson.exp = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": exp processed.");
 
         //current HP
         workingString = findParticularProperty("curHp", personInString);
         newPerson.currentHp = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": currentHitpoints processed.");
 
         //size
         workingString = findParticularProperty("size", personInString);
         newPerson.size = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": size processed.");
 
         //kills
         workingString = findParticularProperty("noOfKills", personInString);
         newPerson.numberOfKills = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": number of kills processed.");
 
         //damage done
         workingString = findParticularProperty("damageDone", personInString);
         newPerson.damageDone = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": damage done processed.");
 
 
         //available attribute points
         workingString = findParticularProperty("availableAttributePoints", personInString);
         newPerson.availAttrPoints = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": available attr points processed.");
 
         //available skill points
         workingString = findParticularProperty("availableSkillPoints", personInString);
         newPerson.availSkillPoints = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": available skill points processed.");
 
         //available perk points
         workingString = findParticularProperty("availableTraitPoints", personInString);
         newPerson.availTraitPoints = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": available trait points processed.");
 
         //Ranger or Follower?
         workingString = findParticularProperty("isCNPC", personInString);
         newPerson.isCNPC = Boolean.parseBoolean(workingString);
+        appLogger.fine(newPerson.name + ": CNPC processed.");
 
         //lucky hitpoints
         workingString = findParticularProperty("luckyHitpoints", personInString);
         newPerson.luckyHp = Integer.parseInt(workingString);
+        appLogger.fine(newPerson.name + ": lucky hitpoints processed.");
 
         //attributes
         Map<String, Integer> newAttributes = new HashMap<>();
@@ -232,6 +250,7 @@ public class SaveHandler {
         }
 
         newPerson.attributes = newAttributes;
+        appLogger.fine(newPerson.name + ": attributes processed.");
 
         //skills
         Map<String, Skill> newSkills = new HashMap<>();
@@ -248,6 +267,7 @@ public class SaveHandler {
                 newPerson.setSkillValue(skillPair.getKey(), skillPair.getValue());
             }
         }
+        appLogger.fine(newPerson.name + ": skills processed.");
 
         //traits
         properties = findParticularProperty("traits", personInString);
@@ -267,6 +287,7 @@ public class SaveHandler {
         }
 
         newPerson.traits = newTraits;
+        appLogger.fine(newPerson.name + ": traits processed.");
 
         return newPerson;
     }
