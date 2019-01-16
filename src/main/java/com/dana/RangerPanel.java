@@ -18,7 +18,7 @@ public class RangerPanel extends JPanel {
     Color panelTextColor = new Color(243, 144, 47);
     Color panelBackground = Color.black;
 
-    private JPanel pnlAttributes;
+//    private JPanel pnlAttributes;
 
     private JLabel lblName;
     private JLabel lblRank;
@@ -137,42 +137,44 @@ public class RangerPanel extends JPanel {
 
 
 
-        //pnlAttributes
-        pnlAttributes.setLayout(new MigLayout(
-                "hidemode 3",
-                // columns
-                "[fill]" +
-                        "[]",
-                // rows
-                "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]"));
+//        //pnlAttributes
+//        pnlAttributes.setLayout(new MigLayout(
+//                "hidemode 3",
+//                // columns
+//                "[fill]" +
+//                        "[]",
+//                // rows
+//                "[]" +
+//                        "[]" +
+//                        "[]" +
+//                        "[]" +
+//                        "[]" +
+//                        "[]" +
+//                        "[]" +
+//                        "[]"));
+//
+//        for (int i = 0; i < ATTRIBUTES_IN_ORDER.length; i++) {
+//
+//            //attribute name
+//            JLabel attrLabel = new JLabel();
+//            String attribute = ATTRIBUTES_IN_ORDER[i];
+//            attrLabel.setText(attribute);
+//            pnlAttributes.add(attrLabel, "cell 0 " + i) ;
+//
+//            //attribute value - can be queried for name of its corresponding attribute
+//            JLabel valueLabel = new JLabel();
+//            valueLabel.setName(attribute);
+//            valueLabel.setText(ranger.getAttributeValue(attribute.toLowerCase()));
+//            pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
+//
+//        }
+//
+//        pnlAttributes.setBackground(panelBackground);
+//        setTextColor(pnlAttributes, panelTextColor);
+//        setPanelBorder(pnlAttributes, "Attributes", panelTextColor);
+//        add(pnlAttributes, "cell 0 9");
 
-        for (int i = 0; i < ATTRIBUTES_IN_ORDER.length; i++) {
-
-            //attribute name
-            JLabel attrLabel = new JLabel();
-            String attribute = ATTRIBUTES_IN_ORDER[i];
-            attrLabel.setText(attribute);
-            pnlAttributes.add(attrLabel, "cell 0 " + i) ;
-
-            //attribute value - can be queried for name of its corresponding attribute
-            JLabel valueLabel = new JLabel();
-            valueLabel.setName(attribute);
-            valueLabel.setText(ranger.getAttributeValue(attribute.toLowerCase()));
-            pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
-
-        }
-
-        pnlAttributes.setBackground(panelBackground);
-        setTextColor(pnlAttributes, panelTextColor);
-        setPanelBorder(pnlAttributes, "Attributes", panelTextColor);
-        add(pnlAttributes, "cell 0 13");
+        add(createAttributePanel(), "cell 0 9" );
 
 //        //---- lblSmartAss ----
 //        lblSmartAss.setText("Smart Ass");
@@ -238,7 +240,7 @@ public class RangerPanel extends JPanel {
     }
 
     private void initComponents() {
-        pnlAttributes = new JPanel();
+//        pnlAttributes = new JPanel();
 
         lblName = new JLabel();
         lblRank = new JLabel();
@@ -263,6 +265,44 @@ public class RangerPanel extends JPanel {
         lblSurgeonlblSurgeonValue = new JLabel();
         lblCompScience = new JLabel();
         lblCompScienceValue = new JLabel();
+    }
+
+    private JPanel createAttributePanel() {
+        JPanel pnlAttributes = new JPanel();
+        pnlAttributes.setLayout(new MigLayout(
+                "hidemode 3",
+                // columns
+                "[fill]" +
+                        "[]",
+                // rows
+                "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]"));
+
+        for (int i = 0; i < ATTRIBUTES_IN_ORDER.length; i++) {
+            //attribute name
+            JLabel attrLabel = new JLabel();
+            String attribute = ATTRIBUTES_IN_ORDER[i];
+            attrLabel.setText(attribute);
+            pnlAttributes.add(attrLabel, "cell 0 " + i) ;
+
+            //attribute value - can be queried for name of its corresponding attribute
+            JLabel valueLabel = new JLabel();
+            valueLabel.setName(attribute);
+            valueLabel.setText(ranger.getAttributeValue(attribute.toLowerCase()));
+            pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
+        }
+
+        pnlAttributes.setBackground(panelBackground);
+        setTextColor(pnlAttributes, panelTextColor);
+        setPanelBorder(pnlAttributes, "Attributes", panelTextColor);
+
+        return pnlAttributes;
     }
 
 }
