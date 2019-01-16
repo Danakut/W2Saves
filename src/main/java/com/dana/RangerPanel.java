@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RangerPanel extends JPanel {
@@ -326,11 +327,17 @@ public class RangerPanel extends JPanel {
                         "[]" +
                         "[]"));
         int i = 0;
+        List<Skill> skillsToSort = new ArrayList<>();
 
         for (String skillXmlName : Skill.SKILL_MAP.keySet()) {
             Skill skill = rangerData.getSkill(skillXmlName);
             if (skill.getValue() > 0) {
+                skillsToSort.add(skill);
+            }
+        }
+        Collections.sort(skillsToSort);
 
+        for (Skill skill: skillsToSort) {
 
                 JLabel skillLabel = new JLabel();
                 skillLabel.setText(skill.getDisplayName());
@@ -347,8 +354,8 @@ public class RangerPanel extends JPanel {
                 pnlSkills.add(valueLabel, "cell 1 " + i + ", alignx trailing");
 
                 i++;
-            }
         }
+
 
         pnlSkills.setBackground(panelBackground);
         setTextColor(pnlSkills, panelTextColor);

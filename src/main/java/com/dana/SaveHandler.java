@@ -27,7 +27,7 @@ public class SaveHandler {
 
     private static final Logger appLogger = Logger.getGlobal();
     private static final Handler appHandler = new ConsoleHandler();
-    private Level reportLevel = Level.FINER;
+    private Level reportLevel = Level.INFO;
 
     private static final String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
 
