@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class Trait {
 
-    public static Map<String, Trait> TRAIT_MAP = initTraitMap();
-    public static int TRAITS_COUNT = TRAIT_MAP.size();
+    public static final Map<String, Trait> TRAIT_MAP = initTraitMap();
+    public static final int TRAITS_COUNT = TRAIT_MAP.size();
 
     private String displayName;
     private String xmlName;

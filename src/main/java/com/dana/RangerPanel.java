@@ -1,6 +1,7 @@
 package com.dana;
 
 import com.dana.entities.Ranger;
+import com.dana.entities.Skill;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -175,6 +176,7 @@ public class RangerPanel extends JPanel {
 //        add(pnlAttributes, "cell 0 9");
 
         add(createAttributePanel(), "cell 0 9" );
+        add(createSkillPanel(), "cell 0 10");
 
 //        //---- lblSmartAss ----
 //        lblSmartAss.setText("Smart Ass");
@@ -303,6 +305,47 @@ public class RangerPanel extends JPanel {
         setPanelBorder(pnlAttributes, "Attributes", panelTextColor);
 
         return pnlAttributes;
+    }
+
+    private JPanel createSkillPanel() {
+        JPanel pnlSkills = new JPanel();
+        pnlSkills.setLayout(new MigLayout(
+                "hidemode 3",
+                // columns
+                "[fill]" +
+                        "[]",
+                // rows
+                "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]"));
+        int i = 0;
+        for (String skillXmlName : Skill.SKILL_MAP.keySet()) {
+            Skill skill = ranger.getSkill(skillXmlName);
+            if (skill.getValue() > 0) {
+                JLabel skillLabel = new JLabel();
+                skillLabel.setText(skill.getDisplayName());
+                pnlSkills.add(skillLabel, "cell 0 " + i);
+
+                JLabel valueLabel = new JLabel();
+                valueLabel.setName(skill.getXmlName());
+                valueLabel.setText(Integer.toString(skill.getValue()));
+                pnlSkills.add(valueLabel, "cell 1 " + i + ", alignx trailing");
+
+                i++;
+            }
+        }
+
+        pnlSkills.setBackground(panelBackground);
+        setTextColor(pnlSkills, panelTextColor);
+        setPanelBorder(pnlSkills, "Skills", panelTextColor);
+
+        return pnlSkills;
+
     }
 
 }

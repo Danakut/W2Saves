@@ -9,7 +9,6 @@ import com.dana.entities.Skill;
 import com.dana.entities.Trait;
 import javafx.util.Pair;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
@@ -17,16 +16,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletionException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SaveHandler {
 
-    public static final Logger logger = Logger.getLogger(App.class.getName());
+    private static final Logger appLogger = Logger.getGlobal();
+    private static final Handler appHandler = new ConsoleHandler();
+    private Level reportLevel = Level.FINE;
 
-    private static String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
+    private static final String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
 
     String content;
     List<String> personsInString;
@@ -35,7 +38,11 @@ public class SaveHandler {
 
 
     public SaveHandler() {
+        appHandler.setLevel(reportLevel);
 
+        appLogger.addHandler(appHandler );
+        appLogger.setLevel(reportLevel);
+        appLogger.setUseParentHandlers(false);
     }
 
     String testThis() {
@@ -55,7 +62,10 @@ public class SaveHandler {
 
         Charset charset = Charset.forName("UTF-8");
         content = new String(Files.readAllBytes(file), charset);
-        logger.info("File " + file.toString() + " opened.");
+        appLogger.info("File " + file.toString() + " opened.");
+
+        appLogger.info("Info test message");
+        appLogger.fine("Fine test message");
     }
 
     private List<String> findPersonStrings() throws Exception {
@@ -94,9 +104,9 @@ public class SaveHandler {
             try {
                 ranger = processPerson(personsInString.get(i));
 
-                logger.info("Person " + i + " added to the list of Ranger objects.");
+                appLogger.info("Person " + i + " added to the list of Ranger objects.");
             } catch (PropertyNotAssembledException e) {
-                logger.info("Person " + i + " could not be processed. Moving on.");
+                appLogger.info("Person " + i + " could not be processed. Moving on.");
             }
 
             list.add(ranger);

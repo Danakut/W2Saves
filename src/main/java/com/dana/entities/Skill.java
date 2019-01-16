@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class Skill {
 
-    public static Map<String, Skill> SKILL_MAP = initSkillMap();
-    public static int SKILLS_COUNT = SKILL_MAP.size();
+    public static final Map<String, Skill> SKILL_MAP = initSkillMap();
+    public static final int SKILLS_COUNT = SKILL_MAP.size();
 
     private String displayName;
     private String xmlName;
@@ -214,6 +214,22 @@ public class Skill {
         newMap.put(skill.xmlName, skill);
 
         return newMap;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getXmlName() {
+        return xmlName;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     public void setValue(int value) {
