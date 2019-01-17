@@ -286,11 +286,13 @@ public class Trait {
         
         trait = new Trait();
         trait.displayName = "Careful Hunter";
+        trait.xmlName = "Trait_CarefulHunter";
         //trait.index = 1;
         newMap.put(trait.xmlName, trait);
         
         trait = new Trait();
         trait.displayName = "Charge!";
+        trait.xmlName = "Trait_Charge";
         //trait.index = 1;
         newMap.put(trait.xmlName, trait);
         
@@ -361,10 +363,6 @@ public class Trait {
         
         trait = new Trait();
         trait.displayName = "Full Metal Jacket";
-        //trait.index = 1;
-        newMap.put(trait.xmlName, trait);
-        
-        trait = new Trait();
         trait.xmlName = "Trait_HollowPoint";
         //trait.index = 1;
         newMap.put(trait.xmlName, trait);
@@ -381,11 +379,12 @@ public class Trait {
         
         trait = new Trait();
         trait.displayName = "Glancing Strike (Blunt)";
+        trait.xmlName = "Trait_GlancingStrike_Blunt";
         //trait.index = 1;
         newMap.put(trait.xmlName, trait);
         
         trait = new Trait();
-        trait.displayName = "Glancing Strike (Brawling";
+        trait.displayName = "Glancing Strike (Brawling)";
         //trait.index = 1;
         newMap.put(trait.xmlName, trait);
         
@@ -426,6 +425,7 @@ public class Trait {
         
         trait = new Trait();
         trait.displayName = "Hoarder";
+        trait.xmlName = "Trait_Hoarder";
         //trait.index = 1;
         newMap.put(trait.xmlName, trait);
 
@@ -641,10 +641,6 @@ public class Trait {
         
         trait = new Trait();
         trait.displayName = "Tactical Positioning";
-        //trait.index = 1;
-        newMap.put(trait.xmlName, trait);
-        
-        trait = new Trait();
         trait.xmlName = "Trait_TacticalPositioning";
         //trait.index = 1;
         newMap.put(trait.xmlName, trait);

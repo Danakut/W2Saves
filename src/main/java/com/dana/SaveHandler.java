@@ -22,11 +22,12 @@ public class SaveHandler {
 
     private static final Logger appLogger = Logger.getGlobal();
     private static final Handler appHandler = new ConsoleHandler();
-    private Level reportLevel = Level.INFO;
+    private Level reportLevel = Level.FINE;
 
     private static final String[] ATTRIBUTE_ARRAY = {"charisma", "intelligence", "speed", "strength", "awareness", "luck", "coordination"};
 
     String content;
+    Path saveFile;
     List<String> personsInString;
     List<Ranger> persons;
     int currentWorkingIndex;
@@ -51,7 +52,7 @@ public class SaveHandler {
         Charset charset = Charset.forName("UTF-8");
         content = new String(Files.readAllBytes(file), charset);
         appLogger.info("File " + file.toString() + " opened.");
-
+        saveFile = file;
     }
 
     private List<String> findPersonStrings() throws Exception {
@@ -64,7 +65,7 @@ public class SaveHandler {
         if (matcher.find()) {
             startIndex = matcher.start();
         } else {
-            throw new Exception("No personsInString found in the savefile.");
+            throw new Exception("No personsInString found in the saveFile.");
         }
 
         //splits the main string into lesser Strings containing just one person each
@@ -122,8 +123,13 @@ public class SaveHandler {
         appLogger.fine(newPerson.name + ": name processed.");
 
         //portrait
+        Path wastelandFolder = saveFile.subpath(0,saveFile.getNameCount() - 3);
+        Path portraitFolder = wastelandFolder.resolve("Custom Portraits");
+
         workingString = findParticularProperty("portraitName", personInString);
-        newPerson.portraitName = workingString;
+        workingString += ".png";
+        Path portraitPath = portraitFolder.resolve(workingString);
+        newPerson.portrait = portraitPath;
         appLogger.fine(newPerson.name + ": portrait processed.");
 
         //gender

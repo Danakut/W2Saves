@@ -2,6 +2,7 @@ package com.dana.entities;
 
 import javafx.util.Pair;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class Ranger {
     private final static Map<Integer, Integer> CONMAP = initConMap();
 
     public String name;
-    public String portraitName; //nebo radeji URI? Path?
+    public Path portrait; //nebo radeji URI? Path?
     public Gender gender;
     public String religion;
     public String smokes;

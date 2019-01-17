@@ -37,16 +37,6 @@ public class RangerPanel extends JPanel {
     private JLabel lblCombatSpeedValue;
     private JLabel lblEvasion;
     private JLabel lblEvasionValue;
-    private JLabel lblSmartAss;
-    private JLabel lblSmartAssValue;
-    private JLabel lblHandguns;
-    private JLabel lblHandgunsValue;
-    private JLabel lblKissAss;
-    private JLabel lblKissAssValue;
-    private JLabel lblSurgeon;
-    private JLabel lblSurgeonlblSurgeonValue;
-    private JLabel lblCompScience;
-    private JLabel lblCompScienceValue;
 
     public RangerPanel(Ranger ranger) {
         this.rangerData = ranger;
@@ -95,8 +85,14 @@ public class RangerPanel extends JPanel {
         add(lblRank, "cell 0 1");
 
         //---- lblIcon ----
-        lblIcon.setText("pic here");
+        ImageIcon img = new ImageIcon("/" + rangerData.portrait.toString());
+        lblIcon.setPreferredSize(new Dimension(200, 200));
+        lblIcon.setIcon(img);
         add(lblIcon, "cell 0 2");
+
+
+
+
 
         //---- lblAP ----
         lblAP.setText("AP " + rangerData.getAP());
@@ -164,8 +160,6 @@ public class RangerPanel extends JPanel {
     }
 
     private void initComponents() {
-//        pnlAttributes = new JPanel();
-
         lblName = new JLabel();
         lblRank = new JLabel();
         lblIcon = new JLabel();
@@ -179,16 +173,6 @@ public class RangerPanel extends JPanel {
         lblCombatSpeedValue = new JLabel();
         lblEvasion = new JLabel();
         lblEvasionValue = new JLabel();
-        lblSmartAss = new JLabel();
-        lblSmartAssValue = new JLabel();
-        lblHandguns = new JLabel();
-        lblHandgunsValue = new JLabel();
-        lblKissAss = new JLabel();
-        lblKissAssValue = new JLabel();
-        lblSurgeon = new JLabel();
-        lblSurgeonlblSurgeonValue = new JLabel();
-        lblCompScience = new JLabel();
-        lblCompScienceValue = new JLabel();
     }
 
     private JPanel createAttributePanel() {

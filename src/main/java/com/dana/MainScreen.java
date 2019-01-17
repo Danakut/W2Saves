@@ -4,7 +4,6 @@
 
 package com.dana;
 
-import javax.swing.border.*;
 import com.dana.entities.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -13,8 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.miginfocom.swing.*;
 
@@ -27,8 +24,8 @@ public class MainScreen extends JFrame {
         myInit();
     }
 
-    Container myContentPane;
-    SaveHandler handler;
+    private Container myContentPane;
+    private SaveHandler handler;
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
