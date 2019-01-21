@@ -89,7 +89,7 @@ public class RangerPanel extends JPanel {
         ImageIcon portraitIcon = new ImageIcon(source.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         lblIcon.setIcon(portraitIcon);
         setPanelBorder(lblIcon, "", panelTextColor);
-        add(lblIcon, "cell 0 2 2 1");
+        add(lblIcon, "cell 0 2");
 
 
 
@@ -181,8 +181,8 @@ public class RangerPanel extends JPanel {
         pnlAttributes.setLayout(new MigLayout(
                 "hidemode 3",
                 // columns
-                "[fill]" +
-                        "[]",
+                "[grow, fill]" +
+                        "[trailing]",
                 // rows
                 "[]" +
                         "[]" +
@@ -204,8 +204,10 @@ public class RangerPanel extends JPanel {
             JLabel valueLabel = new JLabel();
             valueLabel.setName(attribute);
             valueLabel.setText(rangerData.getAttributeValue(attribute.toLowerCase()));
-            pnlAttributes.add(valueLabel, "cell 1 " + i + ", alignx trailing" );
+            pnlAttributes.add(valueLabel, "cell 1 " + i);
         }
+
+        //TODO zarovnavani attributes
 
         pnlAttributes.setBackground(panelBackground);
         setTextColor(pnlAttributes, panelTextColor);
@@ -219,8 +221,8 @@ public class RangerPanel extends JPanel {
         pnlSkills.setLayout(new MigLayout(
                 "hidemode 3",
                 // columns
-                "[fill]" +
-                        "[]",
+                "[grow, fill]" +
+                        "[trailing]",
                 // rows
                 "[]" +
                         "[]" +
@@ -255,12 +257,11 @@ public class RangerPanel extends JPanel {
                     skillLabel.setText("Value of " + skill.getDisplayName() + " not parsed.");
                 }
 
-                pnlSkills.add(valueLabel, "cell 1 " + i + ", alignx trailing");
+                pnlSkills.add(valueLabel, "cell 1 " + i);
 
                 i++;
         }
-
-
+        
         pnlSkills.setBackground(panelBackground);
         setTextColor(pnlSkills, panelTextColor);
         setPanelBorder(pnlSkills, "Skills", panelTextColor);

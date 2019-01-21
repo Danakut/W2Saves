@@ -33,7 +33,6 @@ public class MainScreen extends JFrame {
         mnbMenus = new JMenuBar();
         mnFile = new JMenu();
         mItemLoadFile = new JMenuItem();
-        label1 = new JLabel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -42,9 +41,9 @@ public class MainScreen extends JFrame {
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
             // columns
+            "[trailing]" +
             "[fill]" +
-            "[fill]" +
-            "[fill]" +
+            "[right]" +
             "[fill]" +
             "[fill]" +
             "[fill]" +
@@ -79,10 +78,6 @@ public class MainScreen extends JFrame {
             mnbMenus.add(mnFile);
         }
         setJMenuBar(mnbMenus);
-
-        //---- label1 ----
-        label1.setText("text");
-        contentPane.add(label1, "cell 1 0 2 1");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -94,7 +89,6 @@ public class MainScreen extends JFrame {
     private JMenuBar mnbMenus;
     private JMenu mnFile;
     private JMenuItem mItemLoadFile;
-    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void myInit() {
