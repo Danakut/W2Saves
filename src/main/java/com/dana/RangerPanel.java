@@ -224,13 +224,6 @@ public class RangerPanel extends JPanel {
                 "[grow, fill]" +
                         "[trailing]",
                 // rows
-                "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
                         "[]"));
         int i = 0;
         List<Skill> skillsToSort = new ArrayList<>();
@@ -261,7 +254,7 @@ public class RangerPanel extends JPanel {
 
                 i++;
         }
-        
+
         pnlSkills.setBackground(panelBackground);
         setTextColor(pnlSkills, panelTextColor);
         setPanelBorder(pnlSkills, "Skills", panelTextColor);
