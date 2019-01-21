@@ -85,10 +85,11 @@ public class RangerPanel extends JPanel {
         add(lblRank, "cell 0 1");
 
         //---- lblIcon ----
-        ImageIcon img = new ImageIcon("/" + rangerData.portrait.toString());
-        lblIcon.setPreferredSize(new Dimension(200, 200));
-        lblIcon.setIcon(img);
-        add(lblIcon, "cell 0 2");
+        ImageIcon source = new ImageIcon("/" + rangerData.portrait.toString());
+        ImageIcon portraitIcon = new ImageIcon(source.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        lblIcon.setIcon(portraitIcon);
+        setPanelBorder(lblIcon, "", panelTextColor);
+        add(lblIcon, "cell 0 2 2 1");
 
 
 
