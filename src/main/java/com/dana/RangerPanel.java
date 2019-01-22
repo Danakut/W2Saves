@@ -278,20 +278,20 @@ public class RangerPanel extends JPanel {
         }
     }
 
-//    private JPanel createTraitPanel() {
-//        JPanel pnlTraits = new JPanel();
-//        pnlTraits.setLayout(new MigLayout(
-//                "hidemode 3",
-//                // columns
-//                "[grow, fill]",
-//                // rows
-//                "[]"));
-//        int i = 0;
-//        List<Trait> traitsToSort = new ArrayList<>();
-//
-//        for (Trait trait : rangerData.traits) {
-//
-//        Collections.sort(traitsToSort);
+    private JPanel createTraitPanel() {
+        JPanel pnlTraits = new JPanel();
+        pnlTraits.setLayout(new MigLayout(
+                "hidemode 3",
+                // columns
+                "[grow, fill]",
+                // rows
+                "[]"));
+        int i = 0;
+        List<Trait> traitsToSort = new ArrayList<>();
+
+        for (Trait trait : rangerData.traits) {
+
+        Collections.sort(traitsToSort);
 //
 //        for (Skill trait: skillsToSort) {
 //
@@ -310,13 +310,13 @@ public class RangerPanel extends JPanel {
 //            pnlTraits.add(valueLabel, "cell 1 " + i);
 //
 //            i++;
-//        }
-//
-//        pnlTraits.setBackground(panelBackground);
-//        setTextColor(pnlTraits, panelTextColor);
-//        setPanelBorder(pnlTraits, "Skills", panelTextColor);
-//
-//        return pnlTraits;
-//    }
+        }
+
+        pnlTraits.setBackground(panelBackground);
+        setTextColor(pnlTraits, panelTextColor);
+        setPanelBorder(pnlTraits, "Skills", panelTextColor);
+
+        return pnlTraits;
+    }
 
 }

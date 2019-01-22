@@ -3,7 +3,7 @@ package com.dana.entities;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Trait {
+public class Trait implements Comparable<Trait>{
 
     public static final Map<String, Trait> TRAIT_MAP = initTraitMap();
     public static final int TRAITS_COUNT = TRAIT_MAP.size();
@@ -708,4 +708,8 @@ public class Trait {
         return newMap;
     }
 
+    @Override
+    public int compareTo(Trait o) {
+        return this.displayName.compareTo(o.displayName);
+    }
 }
