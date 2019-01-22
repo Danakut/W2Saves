@@ -138,6 +138,9 @@ public class RangerPanel extends JPanel {
 
         add(createAttributePanel(), "cell 0 9" );
         add(createSkillPanel(), "cell 0 10");
+        if (!rangerData.traits.isEmpty()) {
+            add(createTraitPanel(), "cell 0 11");
+        }
 
         setTextColor(this, panelTextColor);
     }
@@ -194,18 +197,18 @@ public class RangerPanel extends JPanel {
                         "[]" +
                         "[]"));
 
-        for (int i = 0; i < ATTRIBUTES_IN_ORDER.length; i++) {
+        for (int rowIndex = 0; rowIndex < ATTRIBUTES_IN_ORDER.length; rowIndex++) {
             //attribute name
             JLabel attrLabel = new JLabel();
-            String attribute = ATTRIBUTES_IN_ORDER[i];
+            String attribute = ATTRIBUTES_IN_ORDER[rowIndex];
             attrLabel.setText(attribute);
-            pnlAttributes.add(attrLabel, "cell 0 " + i) ;
+            pnlAttributes.add(attrLabel, "cell 0 " + rowIndex) ;
 
             //attribute value - can be queried for name of its corresponding attribute
             JLabel valueLabel = new JLabel();
             valueLabel.setName(attribute);
             valueLabel.setText(rangerData.getAttributeValue(attribute.toLowerCase()));
-            pnlAttributes.add(valueLabel, "cell 1 " + i);
+            pnlAttributes.add(valueLabel, "cell 1 " + rowIndex);
         }
 
         pnlAttributes.setBackground(panelBackground);
@@ -224,7 +227,7 @@ public class RangerPanel extends JPanel {
                         "[trailing]",
                 // rows
                         "[]"));
-        int i = 0;
+        int rowIndex = 0;
         List<Skill> skillsToSort = new ArrayList<>();
 
         for (String skillXmlName : Skill.SKILL_MAP.keySet()) {
@@ -239,7 +242,7 @@ public class RangerPanel extends JPanel {
 
                 JLabel skillLabel = new JLabel();
                 skillLabel.setText(skill.getDisplayName());
-                pnlSkills.add(skillLabel, "cell 0 " + i);
+                pnlSkills.add(skillLabel, "cell 0 " + rowIndex);
 
                 JLabel valueLabel = new JLabel();
                 valueLabel.setName(skill.getXmlName());
@@ -249,9 +252,9 @@ public class RangerPanel extends JPanel {
                     skillLabel.setText("Value of " + skill.getDisplayName() + " not parsed.");
                 }
 
-                pnlSkills.add(valueLabel, "cell 1 " + i);
+                pnlSkills.add(valueLabel, "cell 1 " + rowIndex);
 
-                i++;
+                rowIndex++;
         }
 
         pnlSkills.setBackground(panelBackground);
@@ -286,35 +289,21 @@ public class RangerPanel extends JPanel {
                 "[grow, fill]",
                 // rows
                 "[]"));
-        int i = 0;
-        List<Trait> traitsToSort = new ArrayList<>();
+        int rowIndex = 0;
+        if (rangerData.traits.size() > 1) {
+            Collections.sort(rangerData.traits);
+        }
 
         for (Trait trait : rangerData.traits) {
-
-        Collections.sort(traitsToSort);
-//
-//        for (Skill trait: skillsToSort) {
-//
-//            JLabel skillLabel = new JLabel();
-//            skillLabel.setText(trait.getDisplayName());
-//            pnlTraits.add(skillLabel, "cell 0 " + i);
-//
-//            JLabel valueLabel = new JLabel();
-//            valueLabel.setName(trait.getXmlName());
-//            try {
-//                valueLabel.setText(calculateSkillLevelfromValue(trait.getValue()));
-//            } catch (InvalidSkillValueException ex) {
-//                skillLabel.setText("Value of " + trait.getDisplayName() + " not parsed.");
-//            }
-//
-//            pnlTraits.add(valueLabel, "cell 1 " + i);
-//
-//            i++;
+            JLabel traitLabel = new JLabel();
+            traitLabel.setText(trait.getDisplayName());
+            pnlTraits.add(traitLabel, "cell 0 " + rowIndex);
+            rowIndex++;
         }
 
         pnlTraits.setBackground(panelBackground);
         setTextColor(pnlTraits, panelTextColor);
-        setPanelBorder(pnlTraits, "Skills", panelTextColor);
+        setPanelBorder(pnlTraits, "Traits", panelTextColor);
 
         return pnlTraits;
     }

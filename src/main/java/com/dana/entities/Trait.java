@@ -180,7 +180,7 @@ public class Trait implements Comparable<Trait>{
         
         trait = new Trait();
         trait.displayName = "Thick-Skinned";
-        trait.xmlName = "";
+        trait.xmlName = "Trait_ThickSkin";
         trait.isQuirk = true;
         trait.effect = "+2 base armor";
         trait.drawback = "-30% base Combat Speed";
@@ -405,11 +405,6 @@ public class Trait implements Comparable<Trait>{
         
         trait = new Trait();
         trait.displayName = "Hardened";
-        //trait.index = 1;
-        newMap.put(trait.xmlName, trait);
-        
-        trait = new Trait();
-        trait.xmlName = "Trait_ThickSkin";
         //trait.index = 1;
         newMap.put(trait.xmlName, trait);
         
@@ -710,6 +705,8 @@ public class Trait implements Comparable<Trait>{
 
     @Override
     public int compareTo(Trait o) {
-        return this.displayName.compareTo(o.displayName);
+        String thisName = this.displayName;
+        String thatName = o.displayName;
+        return thisName.compareTo(thatName);
     }
 }
