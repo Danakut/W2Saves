@@ -41,8 +41,7 @@ public class RangerPanel extends JPanel {
 
     public RangerPanel(Ranger ranger) {
         this.rangerData = ranger;
-
-        initComponents();
+        
         setBackground(panelBackground);
         setLayout(new MigLayout(
             "insets 20px,hidemode 3",
@@ -78,61 +77,75 @@ public class RangerPanel extends JPanel {
                     "[]"));
 
         //---- lblName ----
+        lblName = new JLabel();
         lblName.setText(rangerData.name);
         add(lblName, "cell 0 0");
 
         //---- lblRank ----
+        lblRank = new JLabel();
         lblRank.setText(rangerData.getRank());
         add(lblRank, "cell 0 1");
 
         //---- lblIcon ----
         ImageIcon source = new ImageIcon("/" + rangerData.portrait.toString());
         ImageIcon portraitIcon = new ImageIcon(source.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        lblIcon = new JLabel();
         lblIcon.setIcon(portraitIcon);
         setPanelBorder(lblIcon, "", panelTextColor);
         add(lblIcon, "cell 0 2");
 
-
-
-
-
         //---- lblAP ----
+        lblAP = new JLabel();
         lblAP.setText("AP " + rangerData.getAP());
         add(lblAP, "cell 0 3");
 
         //---- lblLevel ----
+        lblLevel = new JLabel();
         lblLevel.setText("Level " + rangerData.level);
         add(lblLevel, "cell 0 3");
 
         //---- lblCon ----
+        lblCon = new JLabel();
         lblCon.setText("CON " + rangerData.currentHp + " / " + rangerData.getCon());
         add(lblCon, "cell 0 4");
 
         //---- lblExp ----
+        lblExp = new JLabel();
         lblExp.setText("Exp " + rangerData.exp + " / " + rangerData.getExpToNextLevel());
         add(lblExp, "cell 0 5");
 
+//        JProgressBar expBar = new JProgressBar(rangerData.getExpToThisLevel(), rangerData.getExpToNextLevel());
+//        expBar.setValue(rangerData.exp);
+//        expBar.setString(rangerData.exp + "/" + rangerData.getExpToNextLevel());
+//        add(expBar, "cell 0 5");
+
         //---- lblCombatInit ----
+        lblCombatInit = new JLabel();
         lblCombatInit.setText("Combat Initiative");
         add(lblCombatInit, "cell 0 6");
 
         //---- lblCombatInitValue ----
+        lblCombatInitValue = new JLabel();
         lblCombatInitValue.setText(rangerData.getInitiative());
         add(lblCombatInitValue, "cell 0 6");
 
         //---- lblCombatSpeed ----
+        lblCombatSpeed = new JLabel();
         lblCombatSpeed.setText("Combat Speed");
         add(lblCombatSpeed, "cell 0 7");
 
         //---- lblCombatSpeedValue ----
+        lblCombatSpeedValue = new JLabel();
         lblCombatSpeedValue.setText(rangerData.getCombatSpeed());
         add(lblCombatSpeedValue, "cell 0 7");
 
         //---- lblEvasion ----
+        lblEvasion = new JLabel();
         lblEvasion.setText("Evasion");
         add(lblEvasion, "cell 0 8");
 
         //---- lblEvasionValue ----
+        lblEvasionValue = new JLabel();
         lblEvasionValue.setText(rangerData.getEvasion());
         add(lblEvasionValue, "cell 0 8");
 
@@ -165,22 +178,6 @@ public class RangerPanel extends JPanel {
 
         container.setBorder(border);
 
-    }
-
-    private void initComponents() {
-        lblName = new JLabel();
-        lblRank = new JLabel();
-        lblIcon = new JLabel();
-        lblAP = new JLabel();
-        lblLevel = new JLabel();
-        lblCon = new JLabel();
-        lblExp = new JLabel();
-        lblCombatInit = new JLabel();
-        lblCombatInitValue = new JLabel();
-        lblCombatSpeed = new JLabel();
-        lblCombatSpeedValue = new JLabel();
-        lblEvasion = new JLabel();
-        lblEvasionValue = new JLabel();
     }
 
     private JPanel createAttributePanel() {

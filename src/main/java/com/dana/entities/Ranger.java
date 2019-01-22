@@ -219,9 +219,14 @@ public class Ranger {
         return Integer.toString(value);
     }
 
-    public String getExpToNextLevel() {
+    public int getExpToNextLevel() {
         Pair<Integer, String> levelInfo = LEVELMAP.get(this.level);
-        return levelInfo.getKey().toString();
+        return levelInfo.getKey();
+    }
+
+    public int getExpToThisLevel() {
+        Pair<Integer, String> levelInfo = LEVELMAP.get(this.level-1);
+        return levelInfo.getKey();
     }
 
     public Skill getSkill(String skill) {
