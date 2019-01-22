@@ -145,21 +145,25 @@ public class Ranger {
     @Override
     public String toString() {
 
-        String skillString = "   skills :\n";
+        String expString = "exp: " + this.exp + "/ " + getExpToNextLevel() + "\n";
+
+        String skillString = "   skills :\n" + "      ";
         for (String xmlName : this.skills.keySet()) {
             Skill skill = this.skills.get(xmlName);
             if (skill.getValue() > 0) {
-                skillString += "   " + skill.getDisplayName() + " = " + skill.getValue() + "\n";
+                skillString += skill.getDisplayName() + " = " + skill.getValue() + ", ";
             }
         }
+        skillString += "\n";
 
         String traitString = "   traits : ";
         for (Trait trait : this.traits) {
             traitString += trait.getDisplayName() + ",  ";
         }
+        traitString += "\n";
 
 
-       return "\n" + this.name + "\n" + skillString + traitString;
+       return "\n" + this.name + "\n" + expString + skillString + traitString;
 
     }
 

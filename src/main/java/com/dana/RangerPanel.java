@@ -31,7 +31,7 @@ public class RangerPanel extends JPanel {
     private JLabel lblAP;
     private JLabel lblLevel;
     private JLabel lblCon;
-    private JLabel lblExp;
+    private JProgressBar expBar;
     private JLabel lblCombatInit;
     private JLabel lblCombatInitValue;
     private JLabel lblCombatSpeed;
@@ -41,7 +41,7 @@ public class RangerPanel extends JPanel {
 
     public RangerPanel(Ranger ranger) {
         this.rangerData = ranger;
-        
+
         setBackground(panelBackground);
         setLayout(new MigLayout(
             "insets 20px,hidemode 3",
@@ -109,15 +109,11 @@ public class RangerPanel extends JPanel {
         lblCon.setText("CON " + rangerData.currentHp + " / " + rangerData.getCon());
         add(lblCon, "cell 0 4");
 
-        //---- lblExp ----
-        lblExp = new JLabel();
-        lblExp.setText("Exp " + rangerData.exp + " / " + rangerData.getExpToNextLevel());
-        add(lblExp, "cell 0 5");
-
-//        JProgressBar expBar = new JProgressBar(rangerData.getExpToThisLevel(), rangerData.getExpToNextLevel());
-//        expBar.setValue(rangerData.exp);
-//        expBar.setString(rangerData.exp + "/" + rangerData.getExpToNextLevel());
-//        add(expBar, "cell 0 5");
+        expBar = new JProgressBar(rangerData.getExpToThisLevel(), rangerData.getExpToNextLevel());
+        expBar.setValue(rangerData.exp);
+        expBar.setStringPainted(true);
+        expBar.setString(rangerData.exp + " /" + rangerData.getExpToNextLevel());
+        add(expBar, "cell 0 5");
 
         //---- lblCombatInit ----
         lblCombatInit = new JLabel();
