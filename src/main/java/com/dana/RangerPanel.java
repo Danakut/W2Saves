@@ -138,8 +138,11 @@ public class RangerPanel extends JPanel {
 
         add(createAttributePanel(), "cell 0 9" );
         add(createSkillPanel(), "cell 0 10");
+        if (!rangerData.quirks.isEmpty()) {
+            add(createQuirkPanel(), "cell 0 11");
+        }
         if (!rangerData.traits.isEmpty()) {
-            add(createTraitPanel(), "cell 0 11");
+            add(createTraitPanel(), "cell 0 12");
         }
 
         setTextColor(this, panelTextColor);
@@ -306,6 +309,33 @@ public class RangerPanel extends JPanel {
         setPanelBorder(pnlTraits, "Traits", panelTextColor);
 
         return pnlTraits;
+    }
+
+    private JPanel createQuirkPanel() {
+        JPanel pnlQuirks = new JPanel();
+        pnlQuirks.setLayout(new MigLayout(
+                "hidemode 3",
+                // columns
+                "[grow, fill]",
+                // rows
+                "[]"));
+        int rowIndex = 0;
+        if (rangerData.quirks.size() > 1) {
+            Collections.sort(rangerData.quirks);
+        }
+
+        for (Trait quirk : rangerData.quirks) {
+            JLabel quirkLabel = new JLabel();
+            quirkLabel.setText(quirk.getDisplayName());
+            pnlQuirks.add(quirkLabel, "cell 0 " + rowIndex);
+            rowIndex++;
+        }
+
+        pnlQuirks.setBackground(panelBackground);
+        setTextColor(pnlQuirks, panelTextColor);
+        setPanelBorder(pnlQuirks, "Quirks", panelTextColor);
+
+        return pnlQuirks;
     }
 
 }
