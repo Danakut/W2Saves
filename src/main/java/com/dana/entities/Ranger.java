@@ -142,6 +142,27 @@ public class Ranger {
 
     }
 
+    @Override
+    public String toString() {
+
+        String skillString = "   skills :\n";
+        for (String xmlName : this.skills.keySet()) {
+            Skill skill = this.skills.get(xmlName);
+            if (skill.getValue() > 0) {
+                skillString += "   " + skill.getDisplayName() + " = " + skill.getValue() + "\n";
+            }
+        }
+
+        String traitString = "   traits : ";
+        for (Trait trait : this.traits) {
+            traitString += trait.getDisplayName() + ",  ";
+        }
+
+
+       return "\n" + this.name + "\n" + skillString + traitString;
+
+    }
+
     /*----------------------derived stats-----------------*/
 
     public int getAP() {

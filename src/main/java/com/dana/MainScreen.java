@@ -126,6 +126,7 @@ public class MainScreen extends JFrame {
         for (int i = 0; i < handler.getRangerCount(); i++) {
             displayPerson(handler.getRanger(i), i);
         }
+        pack();
     }
 
 
@@ -150,7 +151,6 @@ public class MainScreen extends JFrame {
 
     private void displayPerson (Ranger person, int column) {
         myContentPane.add(new RangerPanel(person), "cell " + column + " 1");
-        pack();
-
+        System.out.println(person.toString());
     }
 }
