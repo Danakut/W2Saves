@@ -263,9 +263,10 @@ public class SaveHandler {
         }
         appLogger.fine(newPerson.name + ": skills processed.");
 
-        //traits
+        //traits and quirks
         properties = findParticularProperty("traits", personInString);
         List<Trait> newTraits = new ArrayList<>();
+        List<Trait> newQuirks = new ArrayList<>();
 
         if (!properties.equals("")) {
             List<Pair<String, Integer>> traitPairs = findTraitPairs(properties);
@@ -274,14 +275,20 @@ public class SaveHandler {
                 Trait newTrait = Trait.TRAIT_MAP.get(traitPair.getKey());
                 if (newTrait != null) {
                     newTrait.setValue(traitPair.getValue());
-                    newTraits.add(newTrait);
+                    if (newTrait.getIsQuirk()) {
+                        newQuirks.add(newTrait);
+                    } else {
+                        newTraits.add(newTrait);
+                    }
                 } else throw new PropertyNotAssembledException
                         ("Processing person \"" + newPerson.name + "\" failed at Traits: " + traitPair.getKey() );
             }
         }
 
+        newPerson.quirks = newQuirks;
         newPerson.traits = newTraits;
-        appLogger.fine(newPerson.name + ": traits processed.");
+
+        appLogger.fine(newPerson.name + ": traits & quirks processed.");
 
         return newPerson;
     }

@@ -3,6 +3,7 @@ package com.dana;
 import com.dana.Exceptions.InvalidSkillValueException;
 import com.dana.entities.Ranger;
 import com.dana.entities.Skill;
+import com.dana.entities.Trait;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -207,8 +208,6 @@ public class RangerPanel extends JPanel {
             pnlAttributes.add(valueLabel, "cell 1 " + i);
         }
 
-        //TODO zarovnavani attributes
-
         pnlAttributes.setBackground(panelBackground);
         setTextColor(pnlAttributes, panelTextColor);
         setPanelBorder(pnlAttributes, "Attributes", panelTextColor);
@@ -278,5 +277,46 @@ public class RangerPanel extends JPanel {
             default: throw new InvalidSkillValueException("Skill value " + value + " is not valid.");
         }
     }
+
+//    private JPanel createTraitPanel() {
+//        JPanel pnlTraits = new JPanel();
+//        pnlTraits.setLayout(new MigLayout(
+//                "hidemode 3",
+//                // columns
+//                "[grow, fill]",
+//                // rows
+//                "[]"));
+//        int i = 0;
+//        List<Trait> traitsToSort = new ArrayList<>();
+//
+//        for (Trait trait : rangerData.traits) {
+//
+//        Collections.sort(traitsToSort);
+//
+//        for (Skill trait: skillsToSort) {
+//
+//            JLabel skillLabel = new JLabel();
+//            skillLabel.setText(trait.getDisplayName());
+//            pnlTraits.add(skillLabel, "cell 0 " + i);
+//
+//            JLabel valueLabel = new JLabel();
+//            valueLabel.setName(trait.getXmlName());
+//            try {
+//                valueLabel.setText(calculateSkillLevelfromValue(trait.getValue()));
+//            } catch (InvalidSkillValueException ex) {
+//                skillLabel.setText("Value of " + trait.getDisplayName() + " not parsed.");
+//            }
+//
+//            pnlTraits.add(valueLabel, "cell 1 " + i);
+//
+//            i++;
+//        }
+//
+//        pnlTraits.setBackground(panelBackground);
+//        setTextColor(pnlTraits, panelTextColor);
+//        setPanelBorder(pnlTraits, "Skills", panelTextColor);
+//
+//        return pnlTraits;
+//    }
 
 }
