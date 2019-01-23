@@ -22,8 +22,7 @@ public class RangerPanel extends JPanel {
     static final String[] ATTRIBUTES_IN_ORDER = {"Coordination", "Luck", "Awareness", "Strength", "Speed", "Intelligence", "Charisma"};
     Color panelTextColor = new Color(243, 144, 47);
     Color panelBackground = Color.black;
-
-//    private JPanel pnlAttributes;
+    int mainRowIndex = 0;
 
     private JLabel lblName;
     private JLabel lblRank;
@@ -31,7 +30,7 @@ public class RangerPanel extends JPanel {
     private JLabel lblAP;
     private JLabel lblLevel;
     private JLabel lblCon;
-    private JProgressBar expBar;
+    private JProgressBar prbrExp;
     private JLabel lblCombatInit;
     private JLabel lblCombatInitValue;
     private JLabel lblCombatSpeed;
@@ -46,7 +45,7 @@ public class RangerPanel extends JPanel {
         setLayout(new MigLayout(
             "insets 20px,hidemode 3",
             // columns
-            "[fill]",
+            "[grow, fill]",
             // rows
             "[]" +
                     "[]" +
@@ -79,12 +78,12 @@ public class RangerPanel extends JPanel {
         //---- lblName ----
         lblName = new JLabel();
         lblName.setText(rangerData.name);
-        add(lblName, "cell 0 0");
+        add(lblName, "cell 0 " + mainRowIndex++);
 
         //---- lblRank ----
         lblRank = new JLabel();
         lblRank.setText(rangerData.getRank());
-        add(lblRank, "cell 0 1");
+        add(lblRank, "cell 0 " + mainRowIndex++);
 
         //---- lblIcon ----
         ImageIcon source = new ImageIcon("/" + rangerData.portrait.toString());
@@ -92,66 +91,67 @@ public class RangerPanel extends JPanel {
         lblIcon = new JLabel();
         lblIcon.setIcon(portraitIcon);
         setPanelBorder(lblIcon, "", panelTextColor);
-        add(lblIcon, "cell 0 2");
-
-        //---- lblAP ----
-        lblAP = new JLabel();
-        lblAP.setText("AP " + rangerData.getAP());
-        add(lblAP, "cell 0 3");
+        add(lblIcon, "cell 0 " + mainRowIndex++);
 
         //---- lblLevel ----
         lblLevel = new JLabel();
         lblLevel.setText("Level " + rangerData.level);
-        add(lblLevel, "cell 0 3");
+        add(lblLevel, "cell 0 " + mainRowIndex++);
+
+        //---- prbrExp ----
+        prbrExp = new JProgressBar(rangerData.getExpToThisLevel(), rangerData.getExpToNextLevel());
+        prbrExp.setValue(rangerData.exp);
+        prbrExp.setStringPainted(true);
+        prbrExp.setString(rangerData.exp + " /" + rangerData.getExpToNextLevel());
+        add(prbrExp, "cell 0 " + mainRowIndex++);
 
         //---- lblCon ----
         lblCon = new JLabel();
         lblCon.setText("CON " + rangerData.currentHp + " / " + rangerData.getCon());
-        add(lblCon, "cell 0 4");
+        add(lblCon, "cell 0 " + mainRowIndex++);
 
-        expBar = new JProgressBar(rangerData.getExpToThisLevel(), rangerData.getExpToNextLevel());
-        expBar.setValue(rangerData.exp);
-        expBar.setStringPainted(true);
-        expBar.setString(rangerData.exp + " /" + rangerData.getExpToNextLevel());
-        add(expBar, "cell 0 5");
-
+        //---- lblAP ----
+        lblAP = new JLabel();
+        lblAP.setText("AP " + rangerData.getAP());
+        add(lblAP, "cell 0 " + mainRowIndex++);
+        
         //---- lblCombatInit ----
         lblCombatInit = new JLabel();
         lblCombatInit.setText("Combat Initiative");
-        add(lblCombatInit, "cell 0 6");
+        add(lblCombatInit, "cell 0 " + mainRowIndex);
 
         //---- lblCombatInitValue ----
         lblCombatInitValue = new JLabel();
         lblCombatInitValue.setText(rangerData.getInitiative());
-        add(lblCombatInitValue, "cell 0 6");
+        add(lblCombatInitValue, "cell 0 " + mainRowIndex++);
 
         //---- lblCombatSpeed ----
         lblCombatSpeed = new JLabel();
         lblCombatSpeed.setText("Combat Speed");
-        add(lblCombatSpeed, "cell 0 7");
+        add(lblCombatSpeed, "cell 0 " + mainRowIndex);
 
         //---- lblCombatSpeedValue ----
         lblCombatSpeedValue = new JLabel();
         lblCombatSpeedValue.setText(rangerData.getCombatSpeed());
-        add(lblCombatSpeedValue, "cell 0 7");
+        add(lblCombatSpeedValue, "cell 0 " + mainRowIndex++);
 
         //---- lblEvasion ----
         lblEvasion = new JLabel();
         lblEvasion.setText("Evasion");
-        add(lblEvasion, "cell 0 8");
+        add(lblEvasion, "cell 0 " + mainRowIndex);
 
         //---- lblEvasionValue ----
         lblEvasionValue = new JLabel();
         lblEvasionValue.setText(rangerData.getEvasion());
-        add(lblEvasionValue, "cell 0 8");
+        add(lblEvasionValue, "cell 0 " + mainRowIndex++);
 
-        add(createAttributePanel(), "cell 0 9" );
-        add(createSkillPanel(), "cell 0 10");
+        add(createAttributePanel(), "cell 0 " + mainRowIndex++ );
+        add(createSkillPanel(), "cell 0 " + mainRowIndex++);
         if (!rangerData.quirks.isEmpty()) {
-            add(createQuirkPanel(), "cell 0 11");
+            add(createQuirkPanel(), "cell 0 " + mainRowIndex++);
         }
         if (!rangerData.traits.isEmpty()) {
-            add(createTraitPanel(), "cell 0 12");
+            add(createTraitPanel(), "cell 0 " + mainRowIndex++);
         }
 
         setTextColor(this, panelTextColor);
