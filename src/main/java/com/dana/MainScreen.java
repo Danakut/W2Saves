@@ -129,7 +129,6 @@ public class MainScreen extends JFrame {
         pack();
     }
 
-
     private Path chooseSaveFile() throws FileNotFoundException {
 
         JFileChooser openChooser = new JFileChooser("..");
@@ -151,6 +150,5 @@ public class MainScreen extends JFrame {
 
     private void displayPerson (Ranger person, int column) {
         myContentPane.add(new RangerPanel(person), "cell " + column + " 1");
-        System.out.println(person.toString());
     }
 }

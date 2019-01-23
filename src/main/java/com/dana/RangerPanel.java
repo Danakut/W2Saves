@@ -11,11 +11,14 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class RangerPanel extends JPanel {
+
 
     Ranger rangerData;
 
@@ -24,6 +27,7 @@ public class RangerPanel extends JPanel {
     Color panelBackground = Color.black;
     int mainRowIndex = 0;
 
+    private JButton btnEdit;
     private JLabel lblName;
     private JLabel lblRank;
     private JLabel lblIcon;
@@ -75,6 +79,17 @@ public class RangerPanel extends JPanel {
                     "[]" +
                     "[]"));
 
+        //---- btnEdit ----
+        btnEdit = new JButton();
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        add(btnEdit, "cell 0 " + mainRowIndex++);
+
         //---- lblName ----
         lblName = new JLabel();
         lblName.setText(rangerData.name);
@@ -114,7 +129,7 @@ public class RangerPanel extends JPanel {
         lblAP = new JLabel();
         lblAP.setText("AP " + rangerData.getAP());
         add(lblAP, "cell 0 " + mainRowIndex++);
-        
+
         //---- lblCombatInit ----
         lblCombatInit = new JLabel();
         lblCombatInit.setText("Combat Initiative");
@@ -154,7 +169,9 @@ public class RangerPanel extends JPanel {
             add(createTraitPanel(), "cell 0 " + mainRowIndex++);
         }
 
+        /*---------------coloring the components-----------*/
         setTextColor(this, panelTextColor);
+        btnEdit.setForeground(new Color(203, 112, 45));
     }
 
     private void setTextColor(JComponent container, Color textColor) {
