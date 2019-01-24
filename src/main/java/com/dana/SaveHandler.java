@@ -110,6 +110,15 @@ public class SaveHandler {
         return persons.get(listIndex);
     }
 
+    public Ranger getRanger(String name) {
+        for (Ranger ranger : persons) {
+            if (ranger.name.equals(name)) {
+                return ranger;
+            }
+        }
+        return null;
+    }
+
     //processes a string detailing one person into a Ranger object
     private Ranger processPerson(String personInString) throws PropertyNotAssembledException {
         Ranger newPerson = new Ranger();

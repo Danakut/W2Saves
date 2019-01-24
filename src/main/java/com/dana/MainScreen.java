@@ -6,6 +6,8 @@ package com.dana;
 
 import com.dana.entities.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +20,7 @@ import net.miginfocom.swing.*;
 /**
  * @author Dita Přikrylová
  */
-public class MainScreen extends JFrame {
+public class MainScreen extends JFrame implements ActionListener{
     public MainScreen() {
         initComponents();
         myInit();
@@ -149,6 +151,23 @@ public class MainScreen extends JFrame {
     }
 
     private void displayPerson (Ranger person, int column) {
-        myContentPane.add(new RangerPanel(person), "cell " + column + " 1");
+        RangerPanel panel = new RangerPanel(person);
+        myContentPane.add(panel, "cell " + column + " 1");
+        ActionListener listener = (ActionListener) panel.getTopLevelAncestor();
+        panel.btnEdit.addActionListener(listener);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton editButton = (JButton) e.getSource();
+        myContentPane.removeAll();
+        myContentPane.repaint();
+        Ranger ranger = handler.getRanger(editButton.getName());
+        if (ranger != null) {
+            myContentPane.add(new DetailScreen(ranger), "cell 0 0");
+        } else {
+            myContentPane.add(new DetailScreen(), "cell 0 0");
+        }
+        myContentPane.revalidate();
     }
 }

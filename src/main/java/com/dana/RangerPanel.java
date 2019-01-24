@@ -23,11 +23,12 @@ public class RangerPanel extends JPanel {
     Ranger rangerData;
 
     static final String[] ATTRIBUTES_IN_ORDER = {"Coordination", "Luck", "Awareness", "Strength", "Speed", "Intelligence", "Charisma"};
+   //TODO refactor colors (and attribute order field?) - move into MainScreen as constants? (where all panel classes reference the colors to)
     Color panelTextColor = new Color(243, 144, 47);
     Color panelBackground = Color.black;
     int mainRowIndex = 0;
 
-    private JButton btnEdit;
+    JButton btnEdit;
     private JLabel lblName;
     private JLabel lblRank;
     private JLabel lblIcon;
@@ -82,12 +83,7 @@ public class RangerPanel extends JPanel {
         //---- btnEdit ----
         btnEdit = new JButton();
         btnEdit.setText("Edit");
-        btnEdit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
+        btnEdit.setName(rangerData.name);
         add(btnEdit, "cell 0 " + mainRowIndex++);
 
         //---- lblName ----
