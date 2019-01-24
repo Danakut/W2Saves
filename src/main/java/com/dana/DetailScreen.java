@@ -6,6 +6,9 @@ package com.dana;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import com.dana.entities.Ranger;
 import net.miginfocom.swing.*;
@@ -34,8 +37,15 @@ public class DetailScreen extends JPanel {
     public DetailScreen(Ranger ranger) {
         initComponents();
         rangerData = ranger;
+        myInit();
+
+
     }
 
+    private void myInit() {
+        this.remove(label1);
+        this.add(createBasicPanel(), "cell 0 0");
+    }
 
 
     private void initComponents() {
@@ -107,5 +117,111 @@ public class DetailScreen extends JPanel {
     private JLabel label6;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
+    private JPanel createBasicPanel() {
+        JPanel basicPanel = new JPanel();
+        basicPanel.setLayout(new MigLayout(
+                "hidemode 3",
+                // columns
+                "[fill]",
+                // rows
+                "[]"));
+        int mainRowIndex = 0;
+
+        //---- lblName ----
+        JLabel lblName = new JLabel();
+        lblName.setText(rangerData.name);
+        basicPanel.add(lblName, "cell 0 " + mainRowIndex++);
+
+        //---- lblRank ----
+        JLabel lblRank = new JLabel();
+        lblRank.setText(rangerData.getRank());
+        basicPanel.add(lblRank, "cell 0 " + mainRowIndex++);
+
+        //---- lblIcon ----
+        ImageIcon source = new ImageIcon("/" + rangerData.portrait.toString());
+        ImageIcon portraitIcon = new ImageIcon(source.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        JLabel lblIcon = new JLabel();
+        lblIcon.setIcon(portraitIcon);
+        setPanelBorder(lblIcon, "", panelTextColor);
+        basicPanel.add(lblIcon, "cell 0 " + mainRowIndex++);
+
+        //---- lblLevel ----
+        JLabel lblLevel = new JLabel();
+        lblLevel.setText("Level " + rangerData.level);
+        basicPanel.add(lblLevel, "cell 0 " + mainRowIndex++);
+
+        //---- prbrExp ----
+        JProgressBar prbrExp = new JProgressBar(rangerData.getExpToThisLevel(), rangerData.getExpToNextLevel());
+        prbrExp.setValue(rangerData.exp);
+        prbrExp.setStringPainted(true);
+        prbrExp.setString(rangerData.exp + " /" + rangerData.getExpToNextLevel());
+        basicPanel.add(prbrExp, "cell 0 " + mainRowIndex++);
+
+        //---- lblCon ----
+        JLabel lblCon = new JLabel();
+        lblCon.setText("CON " + rangerData.currentHp + " / " + rangerData.getCon());
+        basicPanel.add(lblCon, "cell 0 " + mainRowIndex++);
+
+        //---- lblAP ----
+        JLabel lblAP = new JLabel();
+        lblAP.setText("AP " + rangerData.getAP());
+        basicPanel.add(lblAP, "cell 0 " + mainRowIndex++);
+
+        //---- lblCombatInit ----
+        JLabel lblCombatInit = new JLabel();
+        lblCombatInit.setText("Combat Initiative");
+        basicPanel.add(lblCombatInit, "cell 0 " + mainRowIndex);
+
+        //---- lblCombatInitValue ----
+        JLabel lblCombatInitValue = new JLabel();
+        lblCombatInitValue.setText(rangerData.getInitiative());
+        basicPanel.add(lblCombatInitValue, "cell 0 " + mainRowIndex++);
+
+        //---- lblCombatSpeed ----
+        JLabel lblCombatSpeed = new JLabel();
+        lblCombatSpeed.setText("Combat Speed");
+        basicPanel.add(lblCombatSpeed, "cell 0 " + mainRowIndex);
+
+        //---- lblCombatSpeedValue ----
+        JLabel lblCombatSpeedValue = new JLabel();
+        lblCombatSpeedValue.setText(rangerData.getCombatSpeed());
+        basicPanel.add(lblCombatSpeedValue, "cell 0 " + mainRowIndex++);
+
+        //---- lblArmor ----
+        JLabel lblArmor = new JLabel();
+        lblArmor.setText("Armor");
+        basicPanel.add(lblArmor, "cell 0 " + mainRowIndex);
+
+        //---- lblArmorValue ----
+        JLabel lblArmorValue = new JLabel();
+        lblArmorValue.setText("0"); //TODO will be replaced with actual armor value when it is possible to calculate
+        basicPanel.add(lblArmorValue, "cell 0 " + mainRowIndex++);
+
+
+        //---- lblEvasion ----
+        JLabel lblEvasion = new JLabel();
+        lblEvasion.setText("Evasion");
+        basicPanel.add(lblEvasion, "cell 0 " + mainRowIndex);
+
+        //---- lblEvasionValue ----
+        JLabel lblEvasionValue = new JLabel();
+        lblEvasionValue.setText(rangerData.getEvasion());
+        basicPanel.add(lblEvasionValue, "cell 0 " + mainRowIndex++);
+
+        return basicPanel;
+    }
+
+    private void setPanelBorder(JComponent container, String title, Color textColor) {
+        Border border = new TitledBorder(
+                new LineBorder(panelTextColor, 3, true),
+                title,
+                TitledBorder.LEADING,
+                TitledBorder.TOP,
+                new Font("Noto Sans", Font.BOLD, 16),
+                textColor);
+
+        container.setBorder(border);
+
+    }
 
 }

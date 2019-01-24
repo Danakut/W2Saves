@@ -176,6 +176,7 @@ public class RangerPanel extends JPanel {
         }
     }
 
+    //TODO make universally available in some other class? (DetailScreen uses this too)
     private void setPanelBorder(JComponent container, String title, Color textColor) {
         Border border = new TitledBorder(
                 new LineBorder(panelTextColor, 3, true),

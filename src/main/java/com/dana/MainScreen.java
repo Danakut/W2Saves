@@ -43,13 +43,6 @@ public class MainScreen extends JFrame implements ActionListener{
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
             // columns
-            "[trailing]" +
-            "[fill]" +
-            "[right]" +
-            "[fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[fill]" +
             "[fill]" +
             "[fill]" +
             "[fill]" +
@@ -62,7 +55,7 @@ public class MainScreen extends JFrame implements ActionListener{
             "[fill]",
             // rows
             "[]" +
-            "[top]" +
+            "[fill]" +
             "[]"));
 
         //======== mnbMenus ========
@@ -164,9 +157,9 @@ public class MainScreen extends JFrame implements ActionListener{
         myContentPane.repaint();
         Ranger ranger = handler.getRanger(editButton.getName());
         if (ranger != null) {
-            myContentPane.add(new DetailScreen(ranger), "cell 0 0");
+            myContentPane.add(new DetailScreen(ranger), "cell 0 1");
         } else {
-            myContentPane.add(new DetailScreen(), "cell 0 0");
+            myContentPane.add(new DetailScreen(), "cell 0 1");
         }
         myContentPane.revalidate();
     }
