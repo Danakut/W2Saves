@@ -43,6 +43,13 @@ public class MainScreen extends JFrame implements ActionListener{
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
             // columns
+            "[trailing]" +
+            "[fill]" +
+            "[right]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
             "[fill]" +
             "[fill]" +
             "[fill]" +
@@ -55,7 +62,7 @@ public class MainScreen extends JFrame implements ActionListener{
             "[fill]",
             // rows
             "[]" +
-            "[fill]" +
+            "[top]" +
             "[]"));
 
         //======== mnbMenus ========
